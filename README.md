@@ -13,18 +13,18 @@ The goal of the system is to upgrade farmers/agriculture scientists in the world
   
 
 ## Project setup
-```
-pip install -r requirements.txt
-```
+  ```
+  pip install -r requirements.txt
+  ```
 
-### Database
-```
-export  agstar.sql file to your MySQL (Your speicific DB Server)
-```
-### Run
+  ### Database
+  ```
+  export  agstar.sql file to your MySQL (Your speicific DB Server)
+  ```
+  ### Run
 
-```
-python agrostar_app.py
+  ```
+  python agrostar_app.py
 ```
 
 
