@@ -1,0 +1,113 @@
+
+<div class="agrostar-navbar navbar-top-fixed">
+		<div class="container-fluid">
+			<div class="row row1">
+				<div class="col-md-2 col-sm-2">
+					<div id="google_translate_element" style="padding-top: 5px;padding-bottom: 12px;"></div>
+				<script type="text/javascript">
+					function googleTranslateElementInit() {
+					  new google.translate.TranslateElement({pageLanguage: 'en', layout: google.translate.TranslateElement.InlineLayout.HORIZONTAL}, 'google_translate_element');
+					}
+				</script>
+
+			</div>
+				<div class="agrostar-navbar-search col-md-8 col-sm-0">
+					<div class="row center-block" style="box-shadow: none">
+						<form method="GET" action="\search">
+						<input class="agrostar-navbar-input input-success col-md-10" type="text" placeholder="Search" name="product-search">
+						<button class="col-md-1  btn btn-success search-btn all-border" type="submit" id="product_search_btn"><img src="" class="glyphicon glyphicon-search"></button>
+						</form>
+					</div>
+
+				<script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+				</div>
+				<div class="regsign col-md-2">
+					<ul class="list">
+						{% if session.logged_in %}
+						
+						<li class="dropdown user-menu pull-left ">
+						<button type="button" class="btn btn-sm btn-success dropdown-toggle all-border" id="dropdownMenu1" data-toggle="dropdown">{{ session.s_name }}&nbsp;&nbsp;&nbsp;<span class="caret"></span> </button>
+						  <ul class="dropdown-menu bg-success all-border" style="padding-right: 10px;">
+						    <li class=""><a href="/user-profile">My Profile</a></li>
+						    <li><a href="/user-orders">Orders</a></li>
+						    <li><a href="/user-wishlists">Wishlists</a></li> 
+						    <li><a href="/logout">Logout</a></li> 
+						 </ul>
+						 </li>   
+						{% else %}
+						<li><a href="/signin" class="text-success"> SignIn</a></li>
+						<li>Or</li>
+						<li><a href="/signup" class="text-success">SignUp</a></li>
+						 {% endif %}
+					</ul>
+				</div>
+			</div>
+			<div class="row row2">
+				<div class="col-md-2  agrostar-brand">
+					
+					<span class="smallnav menu glyphicon glyphicon-menu-hamburger" onclick="openNav()"></span>
+					<img src="{{url_for('static',filename='img/Agrostar.png') }}" class="img-responsive">
+				</div>
+
+				<div class="col-md-8 col-sm-10 ">
+					<ul class="largenav center-block" style="box-shadow: none">
+						<li  class="upper-links"><a class="links "href="/">Homepage</a></li>
+						<li  class="upper-links"><a class="links "href="/products">Products</a></li>
+						
+						<li  class="upper-links"><a class="links "href="/Crops">Crops</a></li>
+						<li  class="upper-links"><a class="links "href="/weather">Weather</a></li>
+						<li  class="upper-links"><a class="links "href="/Farming-info">Farming-Info</a></li>
+						<li  class="upper-links"><a class="links "href="/E-learn">E-learn</a></li>
+						<li  class="upper-links"><a class="links "href="/ask-questions">Ask Questions</a></li>
+					</ul>
+
+				</div>
+				<div class="cart col-md-2   pull-right">
+
+					<a class="cart-button" href="/cart">
+						<img src="{{url_for('static',filename='img/online-shopping-cart.png') }}">
+						<span class="item-number">
+							{% if cart_count %}
+							  {{ cart_count }}	
+							{% else %}
+								0
+							{% endif %}
+						</span>
+					</a>
+				</div>
+			</div>
+		</div>
+	</div>
+
+<div id="mySidenav" class="sidenav">
+	<div class="container" style="padding-top: 10px">
+		<span class="sidenav-heading">Home</span>
+		<a href="javascript:void(0)" class="closebtn" onclick="closeNav()" href="/"><span class="glyphicon glyphicon-remove"></span></a>
+	</div>
+	<a class="links "href="/products">Products</a>
+	<a class="links "href="/Crops">Crops</a>
+	<a class="links "href="/weather">Weather</a>
+	<a class="links "href="/Farming-info">Research-Info</a>
+	<a class="links "href="/E-learn">E-learn</a>
+	<a class="links "href="/ask-questions">Ask Questions</a>
+</div>
+<!---end sideNavbar-->
+<br>
+<br>
+
+<script type="text/javascript">
+	function openNav() {
+		// body...
+		document.getElementById("mySidenav").style.width="60%";
+		
+	}
+	function closeNav() {
+		// body...
+		document.getElementById("mySidenav").style.width="0";
+		
+	}
+
+</script>
+
+
+

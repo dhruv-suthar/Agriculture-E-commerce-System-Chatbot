@@ -1,0 +1,189 @@
+{% extends 'layout.html' %}
+
+{% block body %}
+<section class="Add_To_Cart all-border" style="padding-top: 100px;">  
+
+<div class="container">
+  <h2>Cart</h2>
+  <table id="cart" class="table table-hover table-condensed all-border">
+            <thead>
+            <tr>
+              <th style="width:50%">Product</th>
+              <th style="width:10%">Price<span>(₹)</span></th>
+              <th style="width:8%">Quantity</th>
+              <th style="width:22%" class="text-center">Subtotal<span>(₹)</span></th>
+              <th style="width:10%"></th>
+            </tr>
+          </thead>
+         
+          <tbody>
+            {% for c_details in orders_details %}
+            <tr>
+              <td data-th="Product">
+                <div class="row">
+                  <div class="col-sm-2 hidden-xs"><img src="/static/img/SERVER_FILES/products/{{ c_details.products.product_img }}" alt="..." class="img-responsive" name="" /></div>
+                  <div class="col-sm-10 ">
+                    <h4 class="nomargin" name="product_lb1">{{ c_details.products.product_name }}</h4>
+                    <p name="product_description1">{{ c_details.products.product_description }}</p>
+                  </div>
+                </div>
+              </td>
+              <td data-th="Price(₹)" name="product_price1" id="product_price{{ c_details.order_product_id }}">{{ c_details.products.product_price }}</td>
+              <td data-th="Quantity">
+                <div class="input-group all-border inline"  >
+                                    <span class="input-group-btn ">
+                                        <button type="button" class="quantity-left-minus btn btn-danger btn-number all-border btn-sm"  data-type="minus" data-field="" id="{{ c_details.order_product_id }}">
+                                          <span class="glyphicon glyphicon-minus" ></span>
+                                        </button>
+                                    </span>
+                                    <input type="number" id="product_quantity{{ c_details.order_product_id }}" name="" class="form-control input-number text-center input-sm" value="{{ c_details.quantity }}" min="1" max="{{ c_details.products.product_stock }}" style="width:40px;" >
+                                    <span class="input-group-btn">
+                                        <button type="button" class="quantity-right-plus btn btn-success btn-number  btn-sm" data-type="plus" data-field="" id="{{ c_details.order_product_id }}">
+                                            <span class="glyphicon glyphicon-plus" ></span>
+                                        </button>
+                                    </span>
+                </div>
+              </td>
+              <td data-th="Subtotal" class="text-center" name="product_total_amount" id="product_sub_total{{ c_details.order_product_id }}">{{ c_details.products.product_price * c_details.quantity}}</td>
+              <td class="actions" data-th="">
+                <button class="btn btn-info btn-sm inline all-border cart_refresh" style="display: inline-flex;"  id="{{ c_details.order_product_id }}" data-toggle="tooltip" data-placement="left" title="Update"><i class="glyphicon glyphicon-refresh" ></i></button>
+                <button class="btn btn-danger btn-sm inline all-border cart_remove" style="display: inline-flex;"  id="{{ c_details.order_product_id }}" data-toggle="tooltip" data-placement="right" title="Delete"><i class="glyphicon glyphicon-trash" ></i></button>                
+              </td>
+            </tr>
+            {% endfor %}
+             
+
+          </tbody>
+           {% if cart_count  %}
+          <tfoot>
+            <tr class="visible-xs">
+              <td class="text-center"><strong name="total_amt">Total <span>₹</span>
+                {{ t_c_amt }}
+              
+            </strong></td>
+            </tr>
+            <tr>
+              <td><a href="/products" class="btn btn-warning all-border"><i class="fa fa-angle-left" id="continue_shopping"></i> Continue Shopping</a></td>
+              <td colspan="2" class="hidden-xs"></td>
+              <td class="hidden-xs text-center"><strong name="total_amt">Total <span>₹</span>{{ t_c_amt }}</strong></td>
+              <td><a href="/checkout" class="btn btn-success btn-block" id="checkout">Checkout <i class="fa fa-angle-right"></i></a></td>
+            </tr>
+          </tfoot>
+           {% else %}
+               <tr class="">
+                <td class="text-center" colspan="5"><h4 class=" text-center" style="">Cart is an empty</h4></td>
+              </tr>
+           {% endif %}
+        </table>
+   
+</div>
+</section>	
+	<!---sideNavbar-->
+  <script>
+     $(document).ready(function()
+  {
+   
+     $('[data-toggle="tooltip"]').tooltip();
+     var quantity = 0;
+    $('.cart_refresh').on('click',function(event)
+    {
+    order_p_id=$(this).attr('id');
+
+    //  console.log($('input:text[name=product_quantity+id]').val());
+    quantity = $('#product_quantity' + order_p_id).val();
+   $.ajax({
+       data :JSON.stringify ({
+        'order_product_id' : order_p_id ,
+         'product_quantity' : quantity
+      }),
+      contentType: 'application/json;charset=UTF-8',
+      type : 'POST',
+      url : '/cart/update',
+      error: function(e) {
+                console.log(e);
+                }
+      
+       
+    })
+    .done(function(data) {
+ 
+     // alert('data success');
+     location.reload();  
+    //  $("#cart").replaceWith($("#cart").load("/cart" + "#cart"));
+
+     //  $('#cart').load('/cart #cart');
+    // $("#product_sub_total" + order_p_id).text($('#product_price' + order_p_id).text() * quantity) ;
+            
+
+    });
+   
+      event.preventDefault();
+    });
+  
+     $('.quantity-left-minus').click(function(e){
+        // Stop acting like a button
+          id=$(this).attr('id');
+         e.preventDefault();
+        // Get the field name
+        var quantity = parseInt( $('#product_quantity' + id).val());
+        
+        // If is not undefined
+      
+            // Increment
+            if(quantity>1){
+           $('#product_quantity' + id).val(quantity-1);
+            }
+    });
+       $('.quantity-right-plus').click(function(e){
+        // Stop acting like a button
+          id=$(this).attr('id');
+         e.preventDefault();
+        // Get the field name
+        var quantity = parseInt( $('#product_quantity' + id).val());
+        
+        // If is not undefined
+      
+            // Increment
+
+          if(quantity <   parseInt($('#product_quantity' + id).attr('max')) )
+            {
+           $('#product_quantity' + id).val(quantity+1);
+            }
+            
+    });
+     $('.cart_remove').on('click',function(event)
+    {
+    order_p_id=$(this).attr('id');
+
+    //  console.log($('input:text[name=product_quantity+id]').val());
+   // quantity = $('#product_quantity' + order_p_id).val();
+   $.ajax({
+       data :JSON.stringify ({
+        'order_product_id' : order_p_id ,
+      }),
+      contentType: 'application/json;charset=UTF-8',
+      type : 'POST',
+      url : '/cart/delete',
+      error: function(e) {
+                console.log(e);
+                }
+      
+       
+    })
+    .done(function(data) {
+ 
+     // alert('data success');
+     location.reload();  
+        //$("html").replaceWith($("html").load("/cart"));
+     // $('#cart').load('/cart' + '#cart');
+    // $("#product_sub_total" + order_p_id).text($('#product_price' + order_p_id).text() * quantity) ;
+            
+
+    });
+   
+      event.preventDefault();
+    });  
+
+  });
+   </script> 
+ {% endblock %} 

@@ -1,0 +1,99 @@
+{% extends 'layout.html' %}
+
+  {% block body %}
+<section id="Compare_Products" style="padding-top: 80px;">
+
+ <div class="row container-fluid">
+     <div class="col-sm-12 col-md-3 compare_Grid-title">
+        <h3>Compare <span class="text-success">{{ product_details[0].product_name }}</span>  &nbsp;with others</h3>
+        <p><span>{{ product_details|length }}</span> &nbsp;products</p>
+      </div>
+ </div>
+  <div class="container-fluid">
+
+
+    <div class="row Compare_Grid_Row">
+   
+      {% for product_single_detail in product_details %}
+ 
+        <div class="col-sm-12 col-md-3 compare_Grid">
+          <div class="thumbnail all-border">  
+          <img src="/static/img/SERVER_FILES/products/{{ product_single_detail.product_img }}" alt="Generic placeholder thumbnail" class="img-responsive" style="height: 320px;width: auto;">
+           </div>
+           <div class="caption ">
+            <a href="" class="product_title" style="text-decoration: none;"><h3 class="text-center">{{ product_single_detail.product_name }}</h3></a>
+            <div class="price text-center"><span>₹</span>{{ product_single_detail.product_price }}</div>
+            <hr>
+            <ul class="list list-unstyled order_product_list" style="display: inline-flex;">
+              <li><strong>Ratings Reviews</strong><li>
+              <li><span class="glyphicon glyphicon-star text-success"></span><span class="glyphicon glyphicon-star text-success"></span><span class="glyphicon glyphicon-star text-success"></span><span class="glyphicon glyphicon-star text-success"></span><span class="glyphicon glyphicon-star"></span>
+                <br>
+                <p>2000 Ratings & 1000 Reviews</p></li>
+            </ul>
+              <ul class="list list-unstyled order_product_list" style="display: inline-flex;">
+              <li><strong>Description</strong><li>
+              <li>
+                <p>{{ product_single_detail.product_description }}</p></li>
+            </ul>
+              {% if check_already_exist %}
+              {% for check_al_exist_product in check_already_exist %}
+              {% if check_al_exist_product.product_id != product_single_detail.product_id %}
+              <a href="/cart/add/{{ product_single_detail.product_id }}" class="btn btn-block btn-success" style="" id="add_to_cart"><i class="glyphicon glyphicon-shopping-cart"></i>&nbsp;Add to Cart</a>
+              {% else %}
+               <a href="/cart" class="btn btn-block btn-warning all-border " role="button"  id="go_to_cart"><i class="glyphicon glyphicon-shopping-cart"></i>&nbsp;Go to Cart</a>
+              {% endif %}
+              {% endfor %}
+              {% else %}
+                <a href="/cart/add/{{ product_single_detail.product_id }}" class="btn btn-block btn-success" style="" id="add_to_cart"><i class="glyphicon glyphicon-shopping-cart"></i>&nbsp;Add to Cart</a>
+              {% endif %}
+            <a href="#" class="btn btn-success btn-block" role="button"> Buy Now </a> 
+            </div>
+        </div>
+
+        {% endfor %}
+
+        
+
+       
+
+
+          <div class="col-sm-12 col-md-3 compare_Grid">
+          <div class="thumbnail all-border">  
+          <img src="https://via.placeholder.com/300.png/d3d3d3/fff" alt="Generic placeholder thumbnail" class="img-responsive" style="height: 320px;">
+           </div>
+           <hr>
+           <div class="caption ">
+            <form>
+             <div class="form-group">
+             
+                <select class="form-control all-border" placeholder="user">
+                <option selected="" disabled="">Select Brand</option>
+                <option value="47">Brand A</option>
+                <option value="46">Brand B</option>
+              </select>
+            </div>
+            <div class="form-group">
+             
+                <select class="form-control all-border" placeholder="user">
+                <option selected="" disabled="">Select Product</option>
+                <option value="47">Product A</option>
+                <option value="46">Product B</option>
+              </select>
+            </div>
+            </form>
+            </div>
+        </div>
+    
+
+         
+    </div>
+  </div>
+ </section> 
+  <!---sideNavbar-->
+  <script>
+     $(document).ready(function()
+  {
+    $('.largenav li:nth-child(2)').addClass("active");
+  })
+   </script> 
+{% endblock %}

@@ -1,0 +1,193 @@
+{% extends 'pages/layout.html' %}
+{% block body %}
+
+            <div id="page-wrapper">
+                <div class="container-fluid">
+                    <div class="row">
+                       <div class="col-lg-12">
+                           <ol class="breadcrumb " style="margin-top: 30px;font-size: 15px;background-color: none;">
+                            <li><a href="#">Dashboard</a></li>
+                            <li class="active">Crop Management</li>
+                            <li class="active">View / Update / Delete Crop</li>
+                        </ol>
+                        <hr>
+                       </div>
+                    </div>
+                    <!-- /.row -->
+
+                    <div class="row">
+                        <div class="col-sm-1"></div>
+                        <div class="col-sm-10 center-block">
+                                 {% include 'includes/_messages.html' %}
+                              <div class="Update-crop-panel panel panel-default">
+                               
+                            
+                           
+                        </div>
+                        </div>
+                        <div class="col-sm-1"></div>
+                    </div>
+                  
+
+                    <div class="row">
+                        <div class="col-sm-12">
+                             <div class="panel panel-default">
+                            <div class="panel-heading">
+                                Crop Table
+                            </div>
+                            <div class="panel-body">
+
+
+                        
+
+
+                                <div class="table-responsive">
+                                    <div id="dataTables-example_wrapper" class="dataTables_wrapper form-inline dt-bootstrap no-footer">
+                                            <div class="row">
+                                                <div class="col-sm-12">
+                                                    <table class="table table-striped table-bordered table-hover dataTable no-footer" id="dataTables-example" role="grid" aria-describedby="dataTables-example_info">
+                                            <thead>
+                                                <tr role="row">
+                                                    <th class="sorting_asc" tabindex="0" aria-controls="dataTables-example" rowspan="1" colspan="1" aria-sort="ascending" aria-label="User Type: activate to sort column descending" style="width: 104px;">Crop id</th>
+                                                    <th class="sorting" tabindex="0" aria-controls="dataTables-example" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending" style="width: 209px;">Crop Category</th>
+                                                 
+                                                    <th class="sorting" tabindex="0" aria-controls="dataTables-example" rowspan="1" colspan="1" aria-label="Address: activate to sort column ascending" style="width: 102px;">Crop Name</th>
+                                                    <th class="sorting" tabindex="0" aria-controls="dataTables-example" rowspan="1" colspan="1" aria-label="Active: activate to sort column ascending" style="width: 305px;">Crop Description</th>
+                                                  
+                                                    <th class="sorting" tabindex="0" aria-controls="dataTables-example" rowspan="1" colspan="1" aria-label="Delete: activate to sort column ascending" style="width: 103px;">Update</th>
+                                                    <th class="sorting" tabindex="0" aria-controls="dataTables-example" rowspan="1" colspan="1" aria-label="Delete: activate to sort column ascending" style="width: 103px;">Delete</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                      {%for crop_tb_details in crop_tb_details %}
+                                            <tr class="gradeA odd" role="row">
+                                                    <td class="sorting_1">{{ crop_tb_details.crop_id }}</td>
+                                                    <td>{{ crop_tb_details.crop_category.crop_category_name }}</td>
+                                                    <td>{{ crop_tb_details.crop_name }}</td>
+                                                    <td>{{ crop_tb_details.crop_description }}</td>
+                                                    <td class="center"><a href="#" class="update_crop btn btn-success " role="button"  id="{{ crop_tb_details.crop_id }}"> Update </a></td>
+                                                    <td class="center"><a href="" class="delete_crop btn btn-danger " role="button" id="{{ crop_tb_details.crop_id }}" > Delete </a></td>
+                                                </tr>
+                                          
+                                                {% endfor %}
+                                            </tbody>
+                                        </table></div></div>
+                                    </div>
+                                </div>
+
+
+
+
+                            </div>
+                        </div>
+                        </div>
+                    </div>
+
+            
+                   
+
+
+                </div>
+                <!-- /.container-fluid -->
+            </div>
+            <!-- /#page-wrapper -->
+
+
+        
+
+
+<script>
+$(document).ready(function(){
+
+  
+
+ 
+
+    $('.upload_btn').click(function(){
+        $('.file-upload-input').click();
+        console.log('this');
+      });   
+ $('.update_crop').click(function(event)
+{
+    console.log($(this).attr('id'));
+    $.ajax({
+        url:'/admin/crop-mng/view-update-delete-crops',
+        data:
+        {
+         'crop_id':$(this).attr('id')
+        },
+        success:function(response)
+        {
+             $(".Update-crop-panel").html($(response).find(".Update-crop-panel"));
+             // $('file-upload-input').show();
+             // $('.file-upload-input')[0].files[0] = $('.file-upload-image').attr('src');
+        }
+    });
+
+   
+});
+ $('.delete_crop').click(function(event)
+{
+    console.log($(this).attr('id'));
+    $.ajax({
+        url:'/admin/crop-mng/view-update-delete-crops',
+        data:
+        {
+         'delete_crop_id':$(this).attr('id')
+        },
+        success:function(response)
+        {
+            location.reload();
+           console.log("data is deleted");
+
+        }
+    });
+});
+
+});
+function click_btn(){
+        console.log('data-add');
+        $('.file-upload-input').click();
+        
+    };
+
+
+
+ function readURL(input)
+    {
+               if (input.files && input.files[0]) {
+
+            var reader = new FileReader();
+
+          reader.onload = function(e) {
+            $('.upload_btn').hide();
+             $('.image-title-no').hide();
+            $('.file-upload-image').attr('src', e.target.result);
+            $('.file-upload-image').show();
+            $('.remove-image').show();
+           
+            $('.image-title').html(input.files[0].name);
+          };
+
+          reader.readAsDataURL(input.files[0]);
+
+        } else {
+          removeUpload();
+        }
+    }
+
+    function removeUpload()
+    {
+         $('.file-upload-input').replaceWith($('.file-upload-input').clone());
+        $('.file-upload-input').val('');
+        $('.file-upload-image').hide();
+        $('.remove-image').hide();
+        $('.upload_btn').show();
+         $('.image-title-no').show();
+    } 
+   </script>
+    
+{% endblock %}
+        
+
+

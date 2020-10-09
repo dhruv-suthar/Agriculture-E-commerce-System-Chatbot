@@ -1,0 +1,91 @@
+
+{% extends 'layout.html' %}
+
+{% block body %}
+<br>
+<br>
+<br>
+
+  <div class="container">
+     
+    <div class="row row1">
+      {% include 'includes/_messages.html' %}
+
+      {% if toggle == 1 %}
+      <div class="col-md-2 pull-right">
+      <a href="/Upload-Farming-info" class="btn btn-default  all-border" role="button" style="margin-top: 20px;"> Upload Research-Info </a>
+      </div>
+      {% endif %}
+    </div>
+    <section class="thumbnail_i_V" style="padding-top: 20px;">
+      {% for research_info in research_infos %}
+    <div class="row row2">
+      <div class="col-md-3 col-sm-6 col-xs-6  ">
+         <div class="linear-background  all-border" style="height: 150px;width: 262px;margin:5px;">
+          
+              </div>
+          <a href="/Farming-info/{{ research_info.topic_id }}" class="thumbnail all-border thumbnail-product" >
+         
+          <img src="/static/img/SERVER_FILES/farming-info/{{ research_info.topic_img }}" alt="Generic placeholder thumbnail" class="img-responsive" style="height: 150px;" name="topic_img">  
+        </a>
+       </div>
+        <div class="col-md-4 col-sm-6 col-xs-6 caption" style="height: 150px;">
+           <div class="linear-product-lb  all-border" style="width: 55px;margin:5px;">
+          
+              </div>
+          <h4 class="farming-info-nb">
+             <a href="/Farming-info/{{ research_info.topic_id }}" ><span class="text-success">{{ research_info.topic_name }}</span></a> By
+
+              <div class="linear-product-des  all-border" style="width: 40px;">
+          
+              </div>
+            <span  class="text-danger" style="color: rgba(0,0,0,0.3);">
+
+              {% if toggle == 1 and session.s_name == research_info.users.user_full_name %}
+               You
+              {% else %}
+            {{ research_info.users.user_full_name }}
+             {% endif %}
+
+          </span></h4>
+
+              <div class="linear-product-des  all-border" style="margin:5px;">
+          
+              </div>
+          <p name="topic_description" class="crop-description-scroll farming-info-des" style="width:100%;height: 85px; overflow-y: scroll;scroll-behavior: smooth;">{{ research_info.topic_description }}</p>
+        </div>
+    </div>
+        {% endfor %}
+
+
+
+    
+    </section>
+
+  </div>
+<script>
+    $(document).ready(function()
+  {
+
+    $('.largenav li:nth-child(5)').addClass("active");
+    $('.farming-info-nb').hide();
+    $('.farming-info-des').hide();
+     $(window).scroll(function()
+    {
+          if ($(this).scrollTop())
+          {
+                setInterval(function()
+              { 
+             $('.farming-info-nb').fadeIn();
+            $('.farming-info-des').fadeIn();
+          },1000);
+         }
+    });
+  })
+</script>
+  {% endblock %}
+
+
+
+	
+	

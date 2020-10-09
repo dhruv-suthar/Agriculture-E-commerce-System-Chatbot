@@ -1,0 +1,163 @@
+ {% extends 'pages/layout.html' %}
+ {% block body %}
+  <div id="page-wrapper">
+                <div class="container-fluid">
+                    <div class="row">
+                       <div class="col-lg-12">
+                           <ol class="breadcrumb " style="margin-top: 30px;font-size: 15px;background-color: none;">
+                            <li><a href="#">Dashboard</a></li>
+                            <li class="active">Product Management</li>
+                            <li class="active">View / Update / Delete Products</li>
+                        </ol>
+                        <hr>
+                       </div>
+                    </div>
+                    <!-- /.row -->
+ <div class="Update-crop-panel panel panel-default">
+       {% include 'includes/_messages.html' %}
+                                <div class="panel-heading">Update Crop</div>
+                            
+                            <div class="panel-body">
+                                 <form method="post"  action="/admin/crop-mng/update_crop"
+                                  enctype=multipart/form-data>
+                                     <label class="image-upload" id="{{ crop_tb_details.crop_image }}"></label>
+
+                                   <input type="hidden" name="crop_id" value="{{ crop_tb_details.crop_id }}">
+                                      <div class="form-group inline">    
+                                         <ul class="list list-unstyled upload-i_v_wrapper" style="display: inline-flex;">
+                                           <li>
+                                             <input class="file-upload-input" type='file' onchange="readURL(this);" accept="image/*" hidden="hidden" style="display: none;"  required="" name="file-upload-image" />
+                                             <img class="img-circle file-upload-image img-responsive   all-border " src="/static/img/SERVER_FILES/crops/{{ crop_tb_details.crop_image }}" alt="your image"  style="display: block;" /><br>
+                                             <button type="button" class="btn btn-block btn-lg all-border upload_btn glyphicon glyphicon-plus text-center" onchange="readURL(this); " onclick="click_btn()" style="display: none;"></button>
+                                           </li>
+                                           <li>  
+                                            <br>
+                                            <button type="button" onclick="removeUpload()" class="btn btn-danger btn-sm remove-image  all-border" style="display: block;">Remove <span class="image-title">{{ crop_tb_details.crop_image }}</span></button><br><br><br><br><br>
+                                            <span class="text-center image-title-no" style="display: none;">Upload Image.</span>
+                                            </li>
+                                         </ul>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-sm-6">
+
+                                              
+
+                                                 <div class="form-group">
+                                                    <label for="Crop_Sub_Category" class="col-form-label ">Crop Category</label>
+                                                    <select class="form-control all-border" placeholder="user" name="crop_category" required="">
+                                                        {% for crop_category in crop_category %}
+                                                        {% if crop_category.crop_category_id == crop_tb_details. crop_category_id %}
+                                                        <option value="{{ crop_category.crop_category_id }}" selected="">{{ crop_category.crop_category_name }}</option>
+                                                        {% else %}
+                                                         <option value="{{ crop_category.crop_category_id }}">{{ crop_category.crop_category_name }}</option>
+                                                        {% endif %}
+                                                        {% endfor %}
+                                                     
+                                                    </select>
+                                                        
+                                                </div>
+
+                                                
+                                                 <div class="form-group">
+                                                      <label for="Crop_Name" class="col-form-label ">Crop Name</label>
+                                                    <input type="text" class="form-control all-border" id="Crop_Name" placeholder="" name="crop_name" value="{{ crop_tb_details.crop_name }}" required="">
+                                                </div>
+                                              
+
+                                                
+                                            </div>
+                                            <div class="col-sm-6">
+                                                
+
+                                                <div class="form-group">
+                                                      <label for="Crop_Description" class="col-form-label ">Crop Description</label>
+                                                      <textarea class="form-control" rows="4" id="Crop_Description" name="crop_description" required="">{{ crop_tb_details.crop_description }}</textarea>
+                                                </div>
+
+                                            
+
+                                              
+
+                                                  <button type="submit" class="btn btn-primary btn-block">Update</button>
+                                            </div>
+                                        </div>
+                                        
+                                 </form>
+                                 </div>
+                            </div>
+</div></div>
+<script>
+    $(document).ready(function(){
+
+
+    $('.upload_btn').click(function(){
+        $('.file-upload-input').click();
+        console.log('this');
+      });   
+ $('.update_crop').click(function(event)
+{
+    console.log($(this).attr('id'));
+    $.ajax({
+        url:'/admin/crop-mng/view-update-delete-crops',
+        data:
+        {
+         'crop_id':$(this).attr('id')
+        },
+        success:function(response)
+        {
+             $(".Update-crop-panel").html($(response).find(".Update-crop-panel"));
+        }
+    });
+
+   
+});
+
+});
+function click_btn(){
+        console.log('data-add');
+        $('.file-upload-input').click();
+        
+    };
+
+
+
+ function readURL(input)
+    {
+               if (input.files && input.files[0]) {
+
+            var reader = new FileReader();
+
+          reader.onload = function(e) {
+            $('.upload_btn').hide();
+             $('.image-title-no').hide();
+            $('.file-upload-image').attr('src', e.target.result);
+            $('.file-upload-image').show();
+            $('.remove-image').show();
+           
+            $('.image-title').html(input.files[0].name);
+          };
+
+          reader.readAsDataURL(input.files[0]);
+          console.log($('.file-upload-input').val(''));
+
+        } else {
+          removeUpload();
+        }
+    }
+
+    function removeUpload()
+    {
+         $('.file-upload-input').replaceWith($('.file-upload-input').clone());
+        $('.file-upload-input').val('');
+        $('.file-upload-image').hide();
+        $('.remove-image').hide();
+        $('.upload_btn').show();
+         $('.image-title-no').show();
+    } 
+</script>
+{% endblock %}                            
+
+
+ 
+          

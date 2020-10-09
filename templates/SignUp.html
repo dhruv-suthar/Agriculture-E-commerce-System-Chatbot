@@ -1,0 +1,165 @@
+{% extends 'layout.html' %}
+	
+  {% block body %}
+
+<div class="container">
+
+<div class="row SignUp"> 
+	<div class="col-md-3"></div>
+	<div class="col-md-6  center-block" style="box-shadow: none;">
+     {% include 'includes/_messages.html' %}
+	 	<div class="panel panel-success center-block" style="border-radius: 0.5px">
+
+	 	 <div class="panel-heading bg-white"> 
+	 	 	<h3 class=" text-center">Sign Up</h3> 
+	 	 </div>
+
+		<div class="panel-body"> 
+       {% from "includes/_formhelpers.html" import render_field %}
+			<form  method="post" action="">
+			<div class="form-group">
+            	<!--<label for="User-type" class="col-form-label ">User Type</label>-->
+            		<!--<select class="form-control all-border" placeholder="user" name="user_type">
+        				<option value="47">Farmer</option>
+        				<option value="46">Agriculture Scientist</option>
+      				</select>-->
+              {{ render_field(form.user_type , class_='form-control all-border') }}
+           	</div>
+
+
+           	  <div class="form-group">
+           <!-- <label for="User-Name" class="col-form-label ">Your Name</label>-->
+            <!--<input type="text" class="form-control all-border" id="User-Name" placeholder="Manubhai" name="user_name">-->
+            {{ render_field(form.user_full_name , class_='form-control all-border') }}
+          </div>
+
+
+           <div class="row">
+           <div class="form-group col-sm-9 col-xs-9">
+            <!--<label for="Mobile-No" class="col-form-label ">Mobile No</label>-->
+            <!--<input type="tel" class="form-control all-border" id="User-Name" placeholder="6345471210" name="user_mobile_no">-->
+            {{ render_field(form.user_mobile_no , class_='form-control all-border') }}
+          </div>
+          <div class="form-group col-sm-3 col-xs-3"  style="margin-top: 27px;">
+           <button type="button" class=" btn btn-success" id="send_otp" name="send_otp">Send OTP &nbsp;<i class="fa fa-spinner fa-spin" style="display: none;"></i></button>
+          </div>
+          </div> 
+
+           <div class="form-group">
+           <!-- <label for="OTP" class="col-form-label ">Enter OTP</label>-->
+            <!--<input type="number" class="form-control all-border" id="OTP" placeholder="" name="OTP">-->
+            {{ render_field(form.user_otp , class_='form-control all-border') }}
+          </div>
+
+         
+
+           	<div class="form-group">
+            	<!--<label for="City" class="col-form-label ">City</label>-->
+            		 <!--<input type="text" class="form-control all-border" id="City" placeholder="" name="city">-->
+                 {{ render_field(form.user_city , class_='form-control all-border') }}
+           	</div>
+
+
+			 <div class="form-group">
+            	<!--<label for="State" class="col-form-label ">State</label>-->
+            		<!--<select class="form-control all-border" placeholder="user" name="state">
+        				<option value="+47">Gujarat</option>
+        				<option value="+46">Uttar Pradesh</option>
+      				</select>-->
+              {{ render_field(form.user_state , class_='form-control all-border') }}
+           	</div>
+
+
+           	<div class="form-group">
+            	<!--<label for="Address" class="col-form-label">Address</label>-->
+            		  <!--<textarea class="form-control" id="Address" rows="3" name="address"></textarea>-->
+                  {{ render_field(form.user_address , class_='form-control all-border') }}
+           	</div>
+
+
+           	 <div class="form-group">
+            <!--<label for="User-password" class="col-form-label ">Password</label>-->
+            <!--<input type="password" class="form-control all-border" id="User-password" placeholder="●●●●●●●●" name="password">-->
+            {{ render_field(form.user_password , class_='form-control all-border') }}
+          </div>
+
+           <div class="form-group">
+            <!--<label for="User-co-password" class="col-form-label ">Confirm Password</label>-->
+            <!--<input type="password" class="form-control all-border" id="User-co-password" placeholder="●●●●●●●●" name="confirm_password">-->
+            {{ render_field(form.user_confirm_password , class_='form-control all-border') }}
+          </div>
+
+          <button type="submit" class="btn btn-success btn-block" id="Sign_in" >Sign Up</button>
+          </form>
+
+		</div> 
+		</div>
+	 </div> 
+	 <div class="col-md-3"></div>
+</div>
+
+	</div>
+	<script>
+   $(document).ready(function()
+   {
+    $('.agrostar-navbar-search,.regsign,.agrostar-brand span,.largenav,.cart').hide();
+     $('.agrostar-brand img').css({"margin-bottom":"10px"});
+   
+
+    $('#send_otp').on('click',function(event)
+    {
+    
+       $('#send_otp').attr("disabled","disabled");
+          $('#send_otp i').show();
+
+       $.ajax({
+       data : {
+        user_mobile_no : $('#user_mobile_no').val()
+      },
+      type : 'POST',
+      url : '/signup/sendotp',
+
+
+        success: function (response) {
+
+     
+         $("#send_otp i").hide();
+          $("#send_otp i").removeClass('fa-spinner fa-spin');
+          $('#send_otp i').addClass('fa-check');
+        }
+      
+       
+    })
+      .done(function(data) {
+ 
+      if(data.error)
+      {
+        alert(data.error);
+        $('#send_otp').attr("disabled",false);
+
+        
+          
+      }
+      else
+      {
+          $("#send_otp i").hide();
+          $("#send_otp i").removeClass('fa-spinner fa-spin');
+          $('#send_otp i').addClass('fa-check');
+      }
+     
+
+    });
+       event.preventDefault();
+    });
+    
+   }) 
+  </script>
+{% endblock %}
+
+
+
+
+
+
+
+

@@ -1,0 +1,412 @@
+{% extends 'layout.html' %}
+
+{% block body %}
+  <section class="Product_full_Detail" style="margin-top: 30px;">
+    {% include 'includes/_messages.html' %}
+    <div class="container">
+      <div class="row">
+        <div class="col-md-7  col-sm-7 col-xl-17 pull-left" style="padding-bottom: 10px;">
+          <div class="linear-background">
+          </div>
+          <div class="thumbnail all-border crop_f_detail thumbnail-product" >
+             <ul class="position-absolute bg bg-light" style="position: absolute;border-radius: 1px;padding: 10px;box-shadow: 0 0 5px rgba(0,0,0,0.3) inset;">
+                          <li >
+                            {% if in_having_wishlist == false %}
+                            <a  class="sm-icon-wishlist glyphicon glyphicon-heart-empty" style="font-size: 25px;" name="wishlist" id="{{ product.product_id }}"></a></li>
+                            {% else %}
+                            <a  class="sm-icon-wishlist glyphicon glyphicon-heart" style="font-size: 25px;" name="wishlist" id="{{ product.product_id }}"></a></li>
+                            {% endif %}
+                            
+                          
+                        
+              </ul>
+           <img src="/static/img/SERVER_FILES/products/{{ product.product_img }}" class="img-responsive" style="width: 100%;" >
+             {% if product.product_stock == 0 %}
+              <span class="label label-warning center-block all-border" style="width: 100%;height: 30px;padding-top: 8px;font-size: 15px;">Out Of Stock</span>
+              {% endif %}
+           </div>   
+
+                      
+        </div>
+
+        <div class="col-md-5 col-sm-5 col-xl-5" style="padding-bottom: 10px;">
+          <div class="product_short_descripton">
+            <h3 class="linear-product-lb" style="width: 150px;"></h3>
+            <div class="product_name product_lb" ><h3 name="product_name">{{ product.product_name }} &nbsp;
+
+              </h3></div>
+            
+             <h3 class="linear-product-des" style="width: 80px;"></h3>
+            <div class="product_ratted " name="product_ratted">
+              {% set c=0 %}
+              {% for c in range(product_max_review) %}
+              <span class="fa fa-star text-success"></span>
+              {% endfor %}
+
+              {% set c=0 %}
+              {% for c in range(5-product_max_review)  %}
+              <span class="fa fa-star-o"></span>
+              {% endfor %}
+            
+            </div>
+              <h3 class="linear-product-des" style="width: 50px;"></h3>
+            <div class="price_product" id="p_price" name="product_price">
+               <span>₹</span>{{ product.product_price }}
+            </div>
+
+
+           
+
+       <h3 class="linear-product-des" style="width: 160px;"></h3>
+            <ul class="Brand_name list-inline"  style="padding-top: 20px;" name="Brand">
+                 
+              <li><strong>Brand Name :</strong></li>
+              
+              <li><p id="b_name" class="" name="b_name">{{ product.brand.brand_name }}</p></li>
+            </ul>
+
+            <h3 class="linear-product-des" style="width: 160px;"></h3>
+            <ul class="product_category_name list-inline" style="margin-top: -8px;" name="Product_Category">
+             
+              <li><strong>Product Category :</strong></li>
+              <li><a href=""><p id="p_category" name="p_category">{{ product.product_category.product_category_name }}</p></a></li>
+            </ul>
+
+             {% if product.crop_related %}
+             <h3 class="linear-product-des" style="width: 160px;"></h3>
+             <ul class="crop_name list-inline" style="margin-top: -8px;" name="Crop">
+             
+              <li><strong>Related Crop :</strong></li>
+              <!--crop name list-->
+               
+               <li><p id="c_name" namee="c_name">{{ product.crop_related }}</p></li>
+               <!--end crop name list-->
+            </ul>
+            {% endif %} 
+            {% if product.product_stock !=0 %}
+             {% if enable_add_cart == 0 %}
+              <h3 class="linear-product-des" style="width: 100px; height: 40px;"></h3>
+              <ul class="input-group all-border  list-inline in-de-input" style="margin-top: -8px;" name="quantity">
+             
+                                  <li style="padding: 0px;padding-left: 5px;"> <span class="input-group-btn " >
+                                        <button type="button" class="quantity-left-minus btn btn-danger btn-number all-border btn-sm"  data-type="minus" data-field="" id="{{ product.product_id }}">
+                                          <span class="glyphicon glyphicon-minus" ></span>
+                                        </button>
+                                    </span></li>
+                                    <li style="padding: 0px;">
+                                    <form action="" method="get">
+                                      <input type="number" id="product_quantity{{ product.product_id }}" name="product_qty" class="form-control input-number text-center input-sm" value="1" min="1" max="{{ product.product_stock }}" style="width:40px;" ></form></li>
+                                    <li style="padding: 0px;"><span class="input-group-btn">
+                                        <button type="button" class="quantity-right-plus btn btn-success btn-number  btn-sm " data-type="plus" data-field="" id="{{ product.product_id }}">
+                                            <span class="glyphicon glyphicon-plus" ></span>
+                                        </button>
+                                    </span></li>
+               
+              </ul>
+              {% endif %}
+
+                <h3 class="linear-product-des" style="width: 110px; height: 40px;"></h3>
+            <div class="b_c_button bg-default ">
+              <!--<button type="button" class="btn btn-success btn-md " id="add_to_cart "><span class="glyphicon glyphicon-shopping-cart"></span> Add to Cart <i class="fa fa-spinner fa-spin" style="display: none;"></i></button>-->
+             
+              {% if enable_add_cart == 0 %}
+
+              <a  class="btn btn-success add_to_cart " style="" id="{{ product.product_id }}"><i class="glyphicon glyphicon-shopping-cart"></i>&nbsp;Add to Cart</a>
+
+              {% else %}
+              <a href="/cart" class="btn btn-warning all-border " role="button"  id="go_to_cart"><i class="glyphicon glyphicon-shopping-cart"></i>&nbsp;Go to Cart</a>
+              {% endif %}
+               {% endif %}
+
+          
+
+          </div>
+        </div>
+
+      </div>
+
+      <section class="product_full_description" style="padding-top:0px;">
+       <div class="row">
+        <div class="col-md-8">
+           <h3>Product Description</h3>
+           <hr>
+            <h3 class="linear-product-des" style="width: 410px; "></h3>
+            <h3 class="linear-product-des" style="width: 210px; "></h3>
+            <h3 class="linear-product-des" style="width: 110px; "></h3>
+           <p class="product_description">{{ product.product_description }}</p>
+         </div>
+         </div>
+      
+     </section>
+    
+
+       <section class="Ratings_Reviews" style="padding-top:0px; padding-bottom: 0px;">
+       <div class="row">
+        <div class="col-md-8">
+           <div class="row">
+           <div class="col-md-4 col-sm-4 col-xs-4 pull-left"><h3>Ratings & Reviews</h3></div>
+           {% if session.logged_in %}
+            
+           {% if eligible_for_review == 1  %}
+           <div class="col-md-6 col-sm-6 col-xs-5"></div>
+           <div class="col-md-2 col-sm-2 col-xs-1 " style="margin-top: 15px;"><a href="" class="btn btn-success" role="button">Give Review</a></div>
+           {% endif %}
+           {% endif %}
+        
+            </div>
+            <hr>
+            {% if product_reviews %}
+
+            {% for product_reviews in product_reviews %}
+            <div class="review_tab row">
+
+              <div class="col-md-2">
+                 <h3 class="linear-product-des" style="width: 40px;height: 40px;border-radius: 100px;"></h3>
+                {% if product_reviews.users.user_profile == 'Farmer.jpg' %}
+               
+                <img src="/static/img/icons/{{ product_reviews.users.user_profile }}" class="img-circle img-responsive review-img" style="width: 50px;height: 50px;" name="user_profile_img">
+                
+                {% else %}
+
+                 <img src="/static/img/SERVER_FILES/users/{{ product_reviews.users.user_profile }}" class="img-circle img-responsive review-img" style="width: 50px;height: 50px;" name="user_profile_img">
+                 {% endif %}
+
+              </div>
+           
+              <div class="col-md-6">
+                 <h3 class="linear-product-lb" style="width: 60px;">
+                <h4 class="user_name">
+                  {% if product_reviews.users.user_mobile_no == session.u_mb_no %}
+                  You
+                  {% else %}
+                  {{ product_reviews.users.user_full_name }}
+                  {% endif %}
+                </h4>
+                  <h3 class="linear-product-des" style="width: 210px;"></h3>
+                <p class="product_review" >{{ product_reviews.review_description }}</p>
+              </div>
+
+              <h3 class="linear-product-des" style="width: 50px;"></h3>
+              <div class="product_ratted_individual col-md-2 pull-right" name="product_ratted">
+                {% set i=0 %}
+                {% for i in range(product_reviews.rating) %}
+                   <span class="fa fa-star text-success"></span>
+                {% endfor %}
+              {% set i=0 %}
+              {% for i in range(5-product_reviews.rating) %}
+              <span class="fa fa-star-o"></span>
+              {% endfor %}
+             </div>
+
+          </div>
+          {% endfor %}
+          {% endif %}
+        <hr>
+      
+        {% if eligible_for_review == 1  %}
+        <h3 class="linear-product-des" style="width: 40px;"></h3>
+           <form method="post" name="rating_&_review" class="">
+          
+            <label>Your Rating</label>
+             <div class="give_rate" name="give_rate">
+              
+                <input id="rate1-star5" type="radio" name="rate1" value="5"  required="" />5
+                  <label for="rate1-star5" title="Excellent"   id="rate1-star5">5</label>
+
+                  <input id="rate1-star4" type="radio" name="rate1" value="4" required="" />4
+                  <label for="rate1-star4" title="Good" id="rate1-star4">4</label>
+
+                  <input id="rate1-star3" type="radio" name="rate1" value="3" required="" />3
+                  <label for="rate1-star3" title="Satisfactory" id="rate1-star3">3</label>
+
+                  <input id="rate1-star2" type="radio" name="rate1" value="2" required="" />
+                  <label for="rate1-star2" title="Bad" id="rate1-star2">2</label>2
+
+                  <input id="rate1-star1" type="radio" name="rate1" value="1" required="" />1
+                  <label for="rate1-star1" title="Very bad" id="rate1-star1">1</label>
+             </div>
+         
+
+              <div class="form-group">
+              <label for="Review" class="col-form-label">Your Review</label>
+                  <h3 class="linear-product-des" style="width: 100px;height: 80px;"></h3>
+                  <textarea class="form-control all-border" id="Review" rows="3" name="product_review" class="input-product-review" required=""></textarea>
+            </div>
+
+            <button type="submit" class="btn btn-success" class="give_review_btn">Submit</button>
+         </form>
+         {% endif %}
+      
+         </div>
+         </div>
+     </section>
+
+
+
+
+
+
+<section class="related_products">
+  
+    <div class="row">
+      <div class="col-md-8">
+        <h3>Related Products</h3>
+          <hr>
+
+          <div class="row">
+            {% if recommend_product_list  %}
+            {% for recommend_product_list in recommend_product_list %}
+            <div class="col-md-4 col-sm-6 col-xl-12">
+               <div class="linear-product-lb  all-border" style="width: 190px;height: 220px;">
+          
+           </div>
+                <div class="thumbnail all-border thumbnail-product"> 
+                        <ul class="position-absolute">
+                          <li><a href="" class="glyphicon glyphicon-heart-empty" id="wishlist2"></a></li>
+                           <li><a href="" class="glyphicon glyphicon-shopping-cart" id="cart2"></a></li>
+                            <li><a href="" class="glyphicon glyphicon-random" id="compare1"></a></li>
+                        </ul>
+                        <a href="/products/{{ recommend_product_list.product_id }}"><img src="/static/img/SERVER_FILES/products/{{ recommend_product_list.product_img }}" alt="Generic placeholder thumbnail" class="img-responsive p_tmb" style="height: 250px;width: 100%" name="product_img1"> </a></div>
+                        <div class="caption">
+                          <h3 class="linear-product-lb"></h3>
+                         <a href="/products/{{ recommend_product_list.product_id }}" class="product_title" style="text-decoration: none;"><h3 class="text-center product_lb" name="product_lb1">{{ recommend_product_list.product_name }}</h3></a>
+                          <h3 class="linear-product-des"></h3>
+                         <div class="price product_des text-center" name="product_price1"><span>₹</span>{{ recommend_product_list.product_price }}</div>
+                         
+                      </div>
+
+                 </div>
+                 {% endfor %}
+                 {% endif %}
+
+
+          </div>
+
+
+
+      
+        
+      </div>
+    </div>
+ 
+</section>
+
+ </div>
+  </section>
+  <script  src="{{ url_for('static',filename='js/Filter_Sort.js') }}"></script>
+  <script>
+    $(document).ready(function()
+    {
+
+       $('.largenav li:nth-child(2)').addClass("active");
+        $('.linear-background').css('height','320px');
+        $('.linear-background').css('width','600px');
+
+        $('.product_name').hide();
+        $('.product_ratted').hide();
+        $('.price_product').hide();
+        $('.Brand_name').hide();
+        $('.product_category_name').hide();
+        $('.crop_name').hide();
+        $('.in-de-input').hide();
+        $('.b_c_button').hide();
+        $('.product_description').hide();
+        $('.col-md-2 ').children('.review-img').hide();
+        $('.user_name').hide();
+         $('.product_review').hide();
+        $('.product_ratted_individual').hide();
+        $('.give_rate').hide();
+        $('.input-product-review').hide();
+        $('.give_review_btn').hide();
+         $(window).scroll(function()
+    {
+          if ($(this).scrollTop())
+          {
+                setInterval(function()
+              { 
+                    $('.product_name').fadeIn();
+        $('.product_ratted').fadeIn();
+        $('.price_product').fadeIn();
+        $('.Brand_name').fadeIn();
+        $('.product_category_name').fadeIn();
+        $('.crop_name').fadeIn();
+        $('.in-de-input').fadeIn();
+        $('.b_c_button').fadeIn();
+        $('.product_description').fadeIn();
+         $('.col-md-2 ').children('.review-img').fadeIn();
+       
+        $('.user_name').fadeIn();
+        $('.product_review').fadeIn();
+       
+
+        $('.product_ratted_individual').fadeIn();
+        $('.give_rate').fadeIn();
+        $('.input-product-review').fadeIn();
+        $('.give_review_btn').fadeIn();
+          },1000);
+         }
+    });
+       
+
+       var quantity = 0;
+       $('.add_to_cart').click(function(e)
+       {
+         var  p_id= $(this).attr('id');
+         var p_qty=parseInt( $('#product_quantity' + p_id).val());
+
+          $.ajax({
+       data :JSON.stringify ({
+        'product_id' : p_id ,
+        'order_product_qnt' : p_qty
+      }),
+      contentType: 'application/json;charset=UTF-8',
+      type : 'POST',
+      url : '/cart/add',
+      success: function(e) {
+              window.location.href = "/cart";
+                }    
+    });
+       });
+
+
+
+       $('.quantity-left-minus').click(function(e){
+        // Stop acting like a button
+          id=$(this).attr('id');
+         e.preventDefault();
+        // Get the field name
+        quantity = parseInt( $('#product_quantity' + id).val());
+        
+        // If is not undefined
+      
+            // Increment
+            if(quantity>1){
+           $('#product_quantity' + id).val(quantity-1);
+            }
+           
+    });
+       $('.quantity-right-plus').click(function(e){
+        // Stop acting like a button
+          id=$(this).attr('id');
+         e.preventDefault();
+        // Get the field name
+         quantity = parseInt( $('#product_quantity' + id).val());
+        
+        // If is not undefined
+      
+            // Increment
+            if(quantity <   parseInt($('#product_quantity' + id).attr('max')) )
+            {
+           $('#product_quantity' + id).val(quantity+1);
+            }
+            
+    });
+     $("input[name='rate1']").change(function(event)
+     {
+      console.log($(this).val());
+      event.preventDefault();
+     })
+    });
+  </script>
+{% endblock %}
+

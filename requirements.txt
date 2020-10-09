@@ -1,0 +1,21 @@
+# Used by pip to install required python packages
+# Usage: pip install -r requirements.txt
+
+Flask==0.10.1
+Flask-Assistant
+Flask-WTF
+Flask-SQLAlchemy
+Flask-WhooshAlchemy
+Flask-Uploads
+flask-csrf
+Flask-Mail
+passlib
+WTForms
+Werkzeug==0.15.5
+chatterbot>=0.7.1
+chatterbot-corpus>= 1.1.4
+numpy
+opencv-python
+
+
+

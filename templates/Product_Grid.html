@@ -1,0 +1,261 @@
+{% extends 'layout.html' %}
+
+
+{% block body %}
+<br>
+<br>
+<br>
+ <section class="product_category " style="margin-bottom: 0px;">
+                <div class="container">
+                    <div class="breadcrumb-banner d-flex flex-wrap align-items-center">
+                        <div class="col-first">
+                            <h2>Product Category</h2>
+                             <nav class="d-flex flex-row align-items-center justify-content-start ">
+                                <a href="/products" class="text-success">Products<i class="glyphicon glyphicon-menu-right" aria-hidden="true"></i></a>
+                               
+                               <div class="form-group" style="display: inline-flex;">
+                                  <select class="form-control all-border" placeholder="Product Category" style="height: auto;" name="product_category_selection" id="product_category">
+                                    <option value="" disabled="" selected="">Select Category</option>
+                                    {% for product_cat in product_category %}
+                                  <option value="{{ product_cat.product_category_id }}">{{ product_cat.product_category_name }}</option>
+                                  {% endfor %}
+                                </select>
+                              </div>
+                      
+                            </nav>
+                        </div>
+                    </div>
+                    <hr>
+                </div>
+
+  </section>
+
+
+
+  <div class="container">
+    <div class="row">
+      <div class="col-md-9 col-xl-12 col-sm-6  clearfix">
+
+
+                <div class="d-flex flex-row align-items-center sorting mr-auto justify-content-start " style="display: inline-flex;">
+                  <h5>Sort by :&nbsp;</h5>
+                  <!--<form method="get" name="sort_product">-->
+                  <div class="form-group" >
+                 <select class="form-control all-border" style="height: auto;" name="sort_val" id="sort_by">
+                    <option value="" disabled="" selected="">Select</option>
+                    <option value="1">Price Low to High</option>
+                    <option value="2">Price High to Low</option>
+                
+                    <option value="3">Rating</option>
+                  </select>
+                </div>
+               <!-- </form>-->
+              </div>
+          
+
+          <section class="product_show_area">
+               {% include 'includes/_messages.html' %}
+              <div class="row border border-success product_sub_area">
+
+                  {% for product in products %}
+                  
+                   <div class="col-sm-6 col-xs-12 col-md-3 clearfix px-0"> 
+                     <div class="linear-background  all-border" >
+          
+              </div>
+                      <div class="thumbnail all-border thumbnail-product "> 
+                        <ul class="position-absolute ">
+
+                          <li>
+                            {% if user_wishlist_details %}
+                            {% for user_wishlists_details in user_wishlists_details %}
+                            {% if product.product_id == user_wishlists_details.products.product_id %}
+                            <span class="sm-icon-wishlist glyphicon glyphicon-heart " id="{{ product.product_id }}" onclick=""></span>
+                            {% else %}
+                             <span class="sm-icon-wishlist glyphicon glyphicon-heart-empty " id="{{ product.product_id }}" onclick=""></span>
+                            {% endif %}   
+                            {% endfor %} 
+                            {% else %}
+                              <span class="sm-icon-wishlist glyphicon glyphicon-heart-empty " id="{{ product.product_id }}" onclick=""></span>
+                            {% endif %}
+                         </li>
+                           <li><span class="sm-icon-cart glyphicon glyphicon-shopping-cart " id="{{ product.product_id }}"></span></li>
+                            <li><span class="sm-icon-compare glyphicon glyphicon-random glyphicon-random-empty " id="{{ product.product_id }}"></span></li>
+                            
+                            
+                        </ul>
+                        <a href="/products/{{ product.product_id }}"><img src="/static/img/SERVER_FILES/products/{{ product.product_img }}" alt="Generic placeholder thumbnail" class="img-responsive p_tmb" name="{{ product.product_id }}"> </a>
+                         {% if product.product_stock == 0 %}
+                        <span class="label label-warning center-block all-border" style="width: 100%;height: 30px;padding-top: 8px;font-size: 15px;">Out Of Stock</span>
+                        {% endif %}
+                      </div>
+                        <div class="caption">
+                          <h3 class="linear-product-lb"></h3>
+                         <a href="/products/{{ product.product_id }}" class="product_title" style="text-decoration: none;"><h3 class="text-center text-success product_lb" name="{{ product.product_id }}">{{ product.product_name }}</h3></a>
+                         <h3 class="linear-product-des"></h3>
+                         <div class="price  text-center product_des" name="product_price1"><span>₹</span>{{ product.product_price }}</div>
+                         
+                      </div>
+                    </div>
+                
+                    {% endfor %}
+                  </div>
+
+            </section>
+
+
+   </div>
+
+      <div class="position-right-fixed col-md-3 col-xs-12 col-sm-6  clearfix" >
+        
+
+        <div class="position-fixed panel panel-success  all-border filter-panel product_filters sidebar-nav" >
+              <div class="panel-heading bg-white"> 
+                   <h4 class=" text-center">Product Filters</h4> 
+              </div>
+              <div class="common-filter" style="padding-left: 5px;padding-right: 5px" >
+                <h4 class="filter-header">Active Filters</h4>
+                <ul name="active_filters">
+                  <li class="filter-list " style="color: rgba(0,0,0,0.5);"><i class="glyphicon glyphicon-remove" aria-hidden="true"></i>Black with red (09)</li>
+                   <li class="filter-list " style="color: rgba(0,0,0,0.5);"><i class="glyphicon glyphicon-remove" aria-hidden="true"></i>Black with red (09)</li>
+                </ul>
+                 <hr>
+              </div>
+
+
+               <div class="common-filter" style="padding-left: 5px;padding-right: 5px" >
+                <h4 class="filter-header">Brand</h4>
+                <ul name="brand_list">
+                {% for brand_details in brand %}
+
+                {% if n_data %}
+                {% for f_data in n_data %}
+
+               <li class="filter-list">
+                   <div class="form-check">
+                    <label>
+                  <input type="checkbox" name="filter_data" value="{{ brand_details.brand_name }}" {% if f_data == brand_details.brand_name %}checked=""{% endif %}> <span class="label-text">{{ brand_details.brand_name }}</span>
+
+                    </label>
+                  </div>
+                </li>
+                {% endfor %}
+                {% else %}
+                <li class="filter-list">
+                   <div class="form-check">
+                    <label>
+                         <input type="checkbox" name="filter_data" value="{{ brand_details.brand_name }}"> 
+                         
+                         <span class="label-text">{{ brand_details.brand_name }}</span>
+                    </label>
+                  </div>
+                </li>
+                {% endif %}
+                {% endfor %}
+
+                </ul>
+                 <hr>
+              </div>
+
+
+    
+
+
+              <div class="common-filter" style="padding-left: 10px;padding-right: 10px; padding-bottom: 10px;" >
+                <h4 class="filter-header">Price</h4>
+
+            
+
+               <div class="wrapper" style="">
+                <div class="range-slider">
+                    <input type="text" class="js-range-slider" value="" min="{{ p_price_min_value }}" max=" {{  p_price_max_value  }} " />
+                </div>
+                  
+                <div class="extra-controls form-inline">
+                  <div class="form-group row">
+                    <div class=" col-md-12 col-sm-6 col-xs-6"><input type="text" class="js-input-from form-control all-border" value="15"  /></div>
+                    <div class=" col-md-12 col-sm-6 col-xs-6"><input type="text" class="js-input-to form-control all-border" value="0" /></div>
+                </div>
+                  </div>
+                </div>
+              </div>
+
+               <button class="btn btn-block btn-success all-border" id="filter_btn" value="5">Filter</button>
+
+        </div>
+
+
+      </div>
+
+
+
+
+
+  
+     
+  
+
+    </div>
+
+  
+
+     <ul class="pagination all-border pull-right" name="product_pagination">
+       <li><a href="#">&laquo;</a></li>
+        <li class="active"><a href="#pl1" class="all-border">1</a></li> 
+        <li class="disabled"><a href="#pl2">2</a></li> 
+        <li><a href="#pl3">3</a></li>
+         <li><a href="#pl4">4</a></li>
+          <li><a href="#pl5">5</a></li> 
+          <li><a href="#">&raquo;</a></li>
+        </ul>
+        </div>
+   
+  <div class="row"> 
+    <div class="col-md-4"></div>
+    
+  <div class="col-md-4"></div>
+ </div>
+
+</div>
+
+<script  src="{{ url_for('static',filename='js/Filter_Sort.js') }}"></script>
+<script>
+
+  $(document).ready(function()
+  {
+    $('.linear-background').css('width','190px');
+    $("#filter_btn").click(function(event)
+    {
+
+      price_min_v=$('.js-input-from').val();
+      price_max_v=$('.js-input-to').val();
+      
+       $.ajax({
+              url:'/products',
+              data:
+              {
+
+                'p_min':price_min_v,
+                'p_max':price_max_v
+              },
+                 success: function (response) {
+                 
+                      
+                     //$(".product_show_area").html($(response).find(".product_show_area"));
+                      $(".product_show_area").html($(response).find(".product_show_area"));
+                     
+              
+                 
+              }
+            });
+         if (history.pushState) {
+                  history.pushState(null, null, location.pathname + '?&p_min=' + price_min_v + '&p_max=' + price_max_v );
+              }
+      event.preventDefault();
+
+    });
+   
+
+  });
+</script>
+{% endblock %}

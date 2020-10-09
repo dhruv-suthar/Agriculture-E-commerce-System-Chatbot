@@ -1,0 +1,149 @@
+{% extends 'layout.html' %}
+
+{% block body %}
+
+<section class="my_account" style="padding-top: 100px;">
+  
+
+    <div class="container">
+      <div class="row">
+        <div class="col-md-3 col-sm-12 col-xl-12">
+          <div class="panel panel-success all-border bg ">
+            <div class="panel-body">
+               <div class="profile_container">
+                  
+                  <div class="row">
+                    <div class="col-md-5 col-sm-5 col-xl-5">
+                       {% if get_user_data.user_profile != 'Farmer.jpg' %}
+                      <img src="static/img/SERVER_FILES/users/{{ get_user_data.user_profile }}" class="img-rounded Farmer-login-icon" name="user_img">
+                      {% else %}
+                        <img src="static/img/icons/{{ get_user_data.user_profile }}" class="img-rounded Farmer-login-icon" name="user_img">
+                      {% endif %}
+                    </div>
+                    <div class="col-md-7 col-sm-7 col-xl-7">
+                      <p>Hello</p>
+                      <h4 name="user_name">{{ session.s_name }}</h4>
+
+                    </div>
+                  </div>
+               </div>
+            </div>
+           
+          </div>
+
+         
+              <div class="list-group my_account_links all-border">
+                <a href="/user-profile" class="list-group-item ">My Profile</a>
+                <a href="/user-orders" class="list-group-item ">Orders</a>
+                <a href="/user-wishlists" class="list-group-item active">Wishlists</a>
+                <a href="/logout" class="list-group-item all-border">Logout</a>
+              </div>
+        
+        
+        </div>
+
+        <div class="col-md-9 col-sm-12 col-xl-12">
+          <div class="panel panel-success all-border bg ">
+            <div class="panel-body">
+             <h3>Wishlists</h3>
+             <hr>
+              
+            <div class="orders">
+                {% if user_wishlist_data %}
+               <ul class="order_product_list" style="padding-bottom: 2px;" style="width: 100%;">
+
+                {% for user_wishlist_data in user_wishlist_data %}
+           <li id="{{ user_wishlist_data.product_id }}" >
+            <div class="row" >
+              <div class="col-md-2 col-xl-2 col-sm-2 ">
+                <img src="static/img/SERVER_FILES/products/{{ user_wishlist_data.products.product_img }}" alt="..." class="img-responsive" name="product_img" />
+              </div>
+
+               <div class="col-md-8 col-xl-8 col-sm-8 inline ">
+                <p name="product_lb">{{ user_wishlist_data.products.product_name }}</p>
+                  <p class="" name="product_price">{{ user_wishlist_data.products.product_price }}</p>
+              </div>
+
+                <div class="col-md-2 col-xl-2 col-sm-2">
+              <br>
+              <button class="btn btn-sm btn-danger  all-border glyphicon glyphicon-trash remove_wishlist" id="{{ user_wishlist_data.wishlist_id }} "></button>
+              <button class="btn btn-sm btn-success  all-border glyphicon glyphicon-shopping-cart move_product" id="{{ user_wishlist_data.wishlist_id }}"></button>
+              </div>
+
+            </div>
+          </li>
+          {% endfor %}
+          </ul>
+            {% else %}
+             <a  href="/products" class="btn btn-block btn-success  all-border  center-block" id="move_product">Continue Shopping</a>
+            {% endif %}
+
+            </div>
+   
+          
+    
+            </div>
+           
+          </div>
+
+         
+             
+        
+        
+        </div>
+
+
+     </div>   
+
+    </div>
+</section>
+<script>
+  $(document).ready(function()
+  {
+    $('.remove_wishlist').click(function(e)
+    {
+      $.ajax(
+      {
+          url:'/user-wishlists',
+              data:
+              {
+
+                'delete_wishlist_id':$(this).attr('id')
+              },
+                 success: function (response) {
+                 
+                      
+                   
+                     location.reload();
+                     
+              
+                 
+              }
+      });
+      e.preventDefault();
+    });
+     $('.move_product').click(function(e)
+    {
+      $.ajax(
+      {
+          url:'/user-wishlists',
+              data:
+              {
+
+                'move_wishlist_id':$(this).attr('id')
+              },
+                 success: function (response) {
+                 
+                      
+                   
+                     location.reload();
+                     
+              
+                 
+              }
+      });
+      e.preventDefault();
+    });
+  });
+</script>
+	{% endblock %}

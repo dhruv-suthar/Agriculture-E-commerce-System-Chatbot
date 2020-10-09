@@ -1,0 +1,82 @@
+{% extends 'layout.html' %}
+
+
+{% block body %}
+<section class="confirmation">
+<div class="container">
+  <div class="row">
+    <p style="font-size: 18px;" class="text-center">Thank you. Your order has been received.</p>
+  </div>
+
+  <div class="row center-block">
+    <div class="col-md-6">
+ 
+     <h3>Order Info</h3>
+     <hr>
+ 
+      <div class="order_info">
+        <p>Order Id: &nbsp;<strong name="order_id"># {{ order_info.order_id }}</strong></p>
+         <p>Order No: &nbsp;<strong name="order_no"> {{ order_info.order_no }}</strong></p>
+         <p>Order Date: &nbsp;<strong name="order_date_time">{{ order_info.order_date }}</strong></p>
+            <p>Payment Method:    &nbsp;<strong name="payment_option">{{ payment_info.payment_method }}</strong></p>
+            <p>Total:    &nbsp;<strong name="total_amt"><span>₹</span>{{ order_info. order_total_amt  }}</strong></p>
+      </div>
+   </div>
+
+   <div class="col-md-6">
+ 
+     <h3>Shipping Address</h3>
+     <hr>
+ 
+      <div class="Shipping_Address">
+        <p>Address : &nbsp;<strong name="address">{{ order_info.order_delivery_address }}</strong></p>
+         <p>City: &nbsp;<strong name="city">{{ order_info.city.city_name }}</strong></p>
+           <p>State:    &nbsp;<strong name="state">{{ order_info.city.state.state_name  }}</strong></p>
+           
+      </div>
+   </div>
+
+
+  </div>
+<br>
+<br>
+    <div class="row center-block">
+      
+
+      <div class="col-12" style="padding: 0px 10px 0px 10px;">
+               <h3>Your Order</h3>
+               <hr>
+           <div class="">
+             <table class="table table-hover table-condensed all-border">
+               <thead>
+                 <th>Product</th>
+                 <th>Qty</th>
+                 <th >Total</th>
+               </thead>
+               <tbody>
+                {% for confirm_order_info in confirm_order_info %}
+                 <tr>
+                   <td name="product_lb1">{{ confirm_order_info.products.product_name  }}</td>
+                   <td name="product_qty1">{{ confirm_order_info.quantity }}</td>
+                   <td name="product_t_price1"><span>₹</span>{{ confirm_order_info.quantity * confirm_order_info.products.product_price }}</td>
+                 </tr>
+                 {% endfor %}
+               </tbody>
+               <tfoot>
+                <tr>
+                 <td><strong>Total</strong></td>
+                 <td></td>
+                 <td><strong name="total_amt"><span>₹</span>{{ order_info.order_total_amt  }}</strong></td>
+               </tr>
+               </tfoot>
+             </table>
+           </div>                                                                                                                                                        
+             
+
+      </div>
+
+
+    </div>
+	</div>
+  </section>
+{% endblock %}	

@@ -1,0 +1,226 @@
+  {% extends 'pages/layout.html' %}
+
+  {% block body %}
+           
+            <div id="page-wrapper">
+
+                <div class="container-fluid">
+                    <div class="row">
+
+                        <div class="col-lg-12">
+
+                            <h1 class="page-header">Dashboard</h1>
+                        </div>
+                        <!-- /.col-lg-12 -->
+                    </div>
+                    <!-- /.row -->
+                    <div class="row">
+                           {% include 'includes/_messages.html' %}
+                        <div class="col-lg-4 col-md-6">
+                            <div class="panel panel-primary">
+                                <div class="panel-heading">
+                                    <div class="row">
+                                        <div class="col-xs-3">
+                                            <i class="fa fa-upload fa-5x"></i>
+                                        </div>
+                                        <div class="col-xs-9 text-right">
+                                            <div class="huge">{{ total_upload_files }}</div>
+                                            <div>Uploads</div>
+                                            <br>
+                                            <br>
+
+                                        </div>
+                                    </div>
+                                </div>
+                              
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-md-6">
+                            <div class="panel panel-green">
+                                <div class="panel-heading">
+                                    <div class="row">
+                                        <div class="col-xs-3">
+                                            <i class="fa fa-tasks fa-5x"></i>
+                                        </div>
+                                        <div class="col-xs-9 text-right">
+                                            <div class="huge">{{ get_total_contact_us }}</div>
+                                            <div>Contact-us</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <a href="/admin/contact-us-mng">
+                                    <div class="panel-footer">
+                                        <span class="pull-left">View Details</span>
+                                        <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+
+                                        <div class="clearfix"></div>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-md-6">
+                            <div class="panel panel-yellow">
+                                <div class="panel-heading">
+                                    <div class="row">
+                                        <div class="col-xs-3">
+                                            <i class="fa fa-user fa-5x"></i>
+                                        </div>
+                                        <div class="col-xs-9 text-right">
+                                            <div class="huge">{{ get_total_user }}</div>
+                                            <div>Users</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <a href="/admin/user-mng/view-delete-users">
+                                    <div class="panel-footer">
+                                        <span class="pull-left">View Details</span>
+                                        <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+
+                                        <div class="clearfix"></div>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-md-6">
+                            <div class="panel panel-info">
+                                <div class="panel-heading">
+                                    <div class="row">
+                                        <div class="col-xs-3">
+                                            <i class="fa fa-shopping-bag fa-5x"></i>
+                                        </div>
+                                        <div class="col-xs-9 text-right">
+                                            <div class="huge">{{ get_total_products }}</div>
+                                            <div>Products</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <a href="/admin/product-mng/view-update-delete products">
+                                    <div class="panel-footer">
+                                        <span class="pull-left">View Details</span>
+                                        <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+
+                                        <div class="clearfix"></div>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+
+                          <div class="col-lg-4 col-md-6">
+                            <div class="panel panel-success">
+                                <div class="panel-heading">
+                                    <div class="row">
+                                        <div class="col-xs-3">
+                                            <i class="fa fa-shopping-cart fa-5x"></i>
+                                        </div>
+                                        <div class="col-xs-9 text-right">
+                                            <div class="huge">{{ get_total_orders }}</div>
+                                            <div>Orders</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <a href="/admin/order-mng">
+                                    <div class="panel-footer">
+                                        <span class="pull-left text-success">View Details</span>
+                                        <span class="pull-right text-success"><i class="fa fa-arrow-circle-right"></i></span>
+
+                                        <div class="clearfix"></div>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+
+                          <div class="col-lg-4 col-md-6">
+                            <div class="panel panel-warning">
+                                <div class="panel-heading">
+                                    <div class="row">
+                                        <div class="col-xs-3">
+                                            <i class="fa fa-rupee fa-5x"></i>
+                                        </div>
+                                        <div class="col-xs-9 text-right">
+                                            <div class="huge">{{ get_total_revenue }}</div>
+                                            <div>Revnue</div>
+                                            <br>
+                                            <br>
+                                        </div>
+                                    </div>
+                                </div>
+                               
+                            </div>
+                        </div>
+
+                    </div>
+                    <!-- /.row -->
+                      <div class="panel panel-default">
+                            <div class="panel-heading">
+                               No Of Registered
+                            </div>
+                            <div class="panel-body">
+                    <canvas id="myChart" width="400" height="200"></canvas>
+<script>
+   // bar chart data
+   options = {
+    scales: {
+        yAxes: [{
+            barPercentage: 0.5,
+            barThickness: 6,
+            maxBarThickness: 8,
+            minBarLength: 1,
+            gridLines: {
+                offsetGridLines: true
+            },
+             ticks: {
+                max: 50,
+                min: 0,
+                stepSize: 5
+            },
+
+        }]
+    }
+};
+   var barData = {
+   labels : [{% for item in labels %}
+                  "{{item}}",
+              {% endfor %}],
+   datasets : [
+      {
+        label: 'No Of Registered User',
+             backgroundColor: "rgba(51,122,183,0.8)",
+            fillColor: "rgba(51,122,183,0.8)",
+            strokeColor: "rgba(51,122,183,0.8)",
+            pointColor: "rgba(51,122,183,0.8)",
+         data : [{% for item in values %}
+                      "{{item}}",
+                    {% endfor %}]
+      }
+      ]
+   }
+
+  // get bar chart canvas
+   var mychart = document.getElementById("myChart").getContext("2d");
+  steps = 10
+   max = 10
+   // draw bar chart
+  var myChart = new Chart(mychart, {
+  type: 'bar',
+  data: barData,
+  options: options
+
+});
+</script>
+
+</div>
+</div>
+
+                   
+                </div>
+                <!-- /.container-fluid -->
+            </div>     
+<script>
+
+
+    $(document).ready(function()
+    {
+         $('.nav li:nth-child(1)').addClass("active");
+    });
+</script>
+  {% endblock %}

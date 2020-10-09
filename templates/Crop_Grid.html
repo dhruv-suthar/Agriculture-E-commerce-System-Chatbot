@@ -1,0 +1,65 @@
+{% extends 'layout.html' %}
+
+{% block body %}
+
+<br>
+<br>
+<br>
+<br>
+<div class="container"> 
+<!--<ul class="list-group list-unstyled">
+    {% for value in values %}
+    <li class="list-group-item">
+      <img src="static/img/{{ value.crop_image}}" class="img-responsive">
+      <a href="">{{ value.crop_name }}</a>
+      <p style="height: 50px; overflow-y: scroll;scroll-behavior: smooth;" class="crop-description-scroll">{{ value.crop_description }}</p>
+         <p>{{ value.crop_category.crop_category_name}}</p>
+    </li>
+    {% endfor %}
+  </ul>-->
+</div>
+ 
+
+
+
+  <section class="Crop_Detail" >
+    <div class="container">
+      <div class="row">
+         {% for value in values %}
+        <div class="col-md-3  col-sm-6 col-xl-12">
+          <div class="linear-background" style="height: 150px"></div>
+          <div class="thumbnail all-border crop_tmb thumbnail-product">
+            <a href="#"><img src="/static/img/SERVER_FILES/crops/{{ value.crop_image }}" class="img-responsive"  name="crop_img1"></a>
+           
+            <div class="caption text-center">
+               <a href="/Crops/{{ value.crop_id }}" class="product_title" style="text-decoration: none;"><h3 class="text-center " name="crop_lb1">{{ value.crop_name }}</h3></a>
+              <p style="height: 20px; overflow-y: scroll;scroll-behavior: smooth;" class="crop-description-scroll">{{ value.crop_description }}</p>  
+              </p>
+            </div>
+           </div>
+           <h3 class="linear-product-lb" style="width: 210px;"></h3>
+            <h3 class="linear-product-des" style="width: 210px;"></h3>
+        </div>
+        {% endfor %} 
+      </div>
+
+        <ul class="pagination all-border pull-right" name="crop_pagination">
+       <li><a href="#">&laquo;</a></li>
+        <li class="active"><a href="#cl1" class="all-border">1</a></li> 
+        <li class="disabled"><a href="#cl2">2</a></li> 
+        <li><a href="#cl3">3</a></li>
+         <li><a href="#cl4">4</a></li>
+          <li><a href="#cl5">5</a></li> 
+          <li><a href="#">&raquo;</a></li>
+        </ul>
+    </div>
+  </section>
+
+	
+
+<script>
+   $( document ).ready(function() {
+        $('.largenav li:nth-child(3)').addClass("active");
+    });
+</script>
+{% endblock %}

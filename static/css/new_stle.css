@@ -1,0 +1,312 @@
+*
+{
+	font-family: "Trebuchet MS";
+
+}
+
+.navbar
+{
+	background-color: #fff;	
+	height: 91px;
+	box-shadow: 
+}
+.navbar-collapse
+{
+	background-color: #fff;
+}
+.navbar-brand
+{
+	padding: 0px 10px;
+
+	margin-top: -20px;
+
+}
+.navbar-brand > img
+{
+	height: 50px;
+	margin-top: -10px;
+	padding-top: 0px;
+
+}
+.navbar-form
+{
+	
+	padding-left: 340px;
+}
+
+.navbar-form > .form-group >input
+{
+	width: 600px;
+	font-family: "Trebuchet MS";
+	border-radius: 0.5px;
+	border-color: #47CF73;
+}
+.navbar-form > button
+{
+	border:1px solid #47CF73;
+	border-radius: 0.5px;
+}
+
+.Sign_Page > .navbar-text
+{
+	margin-right: 10px;
+
+}
+.Sign
+{
+	border:1px solid #47CF73;
+	border-radius: 0.5px;
+}
+
+.navbar-collapse > ul
+{
+	
+	margin-top: -40px;
+	line-height: 0px;
+	width: 100%;
+
+	padding-left: 290px;
+	
+	display: inline-block;
+	
+}
+
+
+ .nav-item 
+ {
+ 	text-decoration: none;
+ 	color: #fff;
+
+ 	
+ 	
+     height: 100%;
+    opacity: 0.9;
+    transition: all 0.5s;
+ 	font-family: "Trebuchet MS";
+ 	letter-spacing: 1.5px;
+ 
+ 	font-size:18px;
+
+   
+ }
+ .nav-item:hover
+ {
+ 	
+ 
+ 	text-decoration: none;
+ 	color: #000;
+     height: 100%;
+  
+   transition:all 0.5s;
+ 	font-family: "Trebuchet MS";
+ 	letter-spacing: 2px;
+ 	font-weight: 300;
+ 	font-size:18px;
+ 	
+ 	padding-right: 10px;
+ 	padding-left: 10px;
+ 	/*border-bottom:3px solid black;*/
+ 	
+
+ }
+.nav-item:hover  a:before
+{
+	width: 50%;
+	transition: 0.5s;
+	transform: translateX(100%);
+}
+.nav-item:hover  a:after
+{
+	width: 50%;
+	transition: 0.5s;
+	transform: translateX(-100%);
+}
+.navbar-nav > .activate a:before
+ {
+ width: 50%;
+ background-color: #9d231f;
+ 	
+ }
+ .navbar-nav > .activate a:after
+ {
+ width: 50%;
+ background-color: #47CF73;
+ 	
+ }
+ .nav-item a:before
+ {
+ 	
+ 	content: '';
+ 	width: 0px;
+ 	height: 3px;
+ 	background-color: #47CF73;
+ 	position: absolute;
+ 	transform:all .5s;
+ 	top:100%;
+ 	left:0;
+ 	mix-blend-mode: multiply;
+ }
+ .nav-item a:after
+ {
+ 	
+ 	content: '';
+ 	width: 0px;
+ 	height: 3px;
+ 	background-color: #000;
+ 	position: absolute;
+ 	transform:all .5s;
+ 	top:100%;
+ 	right:0;
+ 	mix-blend-mode: multiply;
+ }
+
+.link_new
+{
+	float: right;
+	text-align: center;
+	margin-top: -40px;
+	padding-right: 10px;
+
+}
+.link_new > .icon_pack
+{
+	height: 30%;
+	width: 30%;
+	transition: 0.5s;
+}
+.link_new > .icon_pack:hover
+{
+	height: 35%;
+	width: 35%;
+	transition: 0.5s;
+	
+}
+.link_new > span 
+{
+	font-size: 10px;
+	background-color: #fff;
+	color:#000;
+	border:1px solid #47CF73;
+	border-radius: 1px;
+	padding: 10px;
+	border-left:none;
+	border-right:none;
+	transition: 0.5s;
+	font-family:"Trebuchet MS"; 
+	margin-right: 15px;
+
+}
+
+#myCarousel
+{
+	margin-top: 80px;
+
+}
+
+.img-responsive
+{
+	height: 200px;
+}
+
+
+ul.social{
+	list-style:none;
+	padding:0;
+	margin-top: 0%;
+	margin-left: 35px;
+}	
+ul.social li:first-child, ol li:first-child {
+	margin-top: 0px;
+	margin-left: 0;
+}
+ul.social li{
+	display:inline-block;
+	margin-right:8px;
+}	
+ul.social li a span:hover{
+	opacity:0.5;
+}		
+li.facebook a span {
+	height: 25px;
+	width: 25px;
+	display: block;
+	background-color: #fff;
+	background: url(D://wbesite/img/img-sprite.png)no-repeat -293px -321px;
+}
+li.twitter a span {
+	height: 25px;
+	width: 25px;
+	display: block;
+	background: url(D://wbesite/img/img-sprite.png)no-repeat -261px -321px;
+}
+li.instagram a span {
+	height: 25px;
+	width: 25px;
+	display: block;
+	background: url(D://wbesite/img/img-sprite.png)no-repeat -322px -321px;
+}
+
+li.youtube a span {
+	height: 25px;
+	width: 47px;
+	display: block;
+	background: url(D://wbesite/img/img-sprite.png)no-repeat -356px -321px;
+}	
+
+
+
+
+@media (max-width: 768px)
+{
+
+.navbar-form
+{
+	
+	padding-left: 15px;
+}
+.navbar-form > .form-group >input
+{
+	width: 365px;
+}
+.navbar-brand 
+{
+	margin-top: 5px;
+	padding-top: 20px;
+}
+.navbar-brand > img
+{
+	
+	height: 30px;
+}
+
+	.navbar-collapse > ul
+{
+	
+	line-height: 0px;
+	width: 100%;
+	padding-left: 0px;
+	
+	
+}
+.navbar-collapse > ul
+{
+	margin-top: 0px;
+}
+.link_new
+{
+	float: right;
+	text-align: center;
+	margin-top: -95px;
+	padding-right: 10px;
+	z-index: 2;
+}
+main
+{
+	margin-top: 220px;
+}
+.navbar
+{
+	background-color: #fff;	
+	height: 220px;
+}
+}

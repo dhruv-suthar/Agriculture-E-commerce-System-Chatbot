@@ -1,0 +1,250 @@
+{% extends 'layout.html' %}
+
+{% block body %}
+<br>
+<br>
+<br>
+<br>	
+<div class="container">
+<div class="row SignUp" style="margin-top: 0px;"> 
+
+	<div class="col-md-3"></div>
+	<div class="col-md-6  center-block" style="box-shadow: none;">
+     {% include 'includes/_messages.html' %}
+	 	<div class="panel panel-success" style="border-radius: 0.5px">
+	 	 <div class="panel-heading bg-white"> 
+	 	 	<h3 class=" text-center" >Upload Farming-Info</h3> 
+	 	 </div>
+
+		<div class="panel-body"> 
+			<form role="role" action="/Upload-Farming-info" method="POST" enctype=multipart/form-data>
+	
+           <div class="form-check">
+              <label>
+                 <input type="radio" name="options" id="opt_1"  data-target="#upload_img" value="opt_1" required=""> <span class="label-text">Upload Image</span>
+              </label>
+              </div> 
+           <div class="form-group inline  collapse in" id="upload_img">    
+         <ul class="list list-unstyled upload-i_v_wrapper " style="display: inline-flex;">
+           <li>
+             <input class="file-upload-input" type='file'  onchange="readURL(this);" accept="image/*" hidden="hidden" style="display: none;" name="file-upload-image" />
+             <img class="file-upload-image img-responsive   all-border" src="#" alt="your image" /><br>
+             <button type="button" class="btn btn-block btn-lg all-border upload_btn" onchange="readURL(this);"><span class="glyphicon glyphicon-plus"></span></button>
+           </li>
+           <li>  
+            <br>
+            <button type="button" onclick="removeUpload()" class="btn btn-danger btn-sm remove-image pull-right all-border">Remove <span class="image-title">Uploaded Image</span></button><br>
+            <span class="text-center image-title-no">Select Image.</span></li>
+         </ul>
+       </div>
+          <div class="form-check">
+              <label>
+                 <input type="radio" name="options" id="opt_2"   data-target="#upload_video" value="opt_2" required=""> <span class="label-text">Upload Video</span>
+              </label>
+              </div> 
+              <div class="form-group collapse in" id="upload_video">
+            <ul class="list list-unstyled upload-i_v_wrapper_new" style="display: inline-flex;">
+           <li>
+             <input class="file-upload-input_new" type='file' onchange="readURL_new(this);" accept="image/*" hidden="hidden" style="display: none;" name="file-upload-thumbnail" />
+             <img class=" file-upload-image_new img-responsive   all-border " src="#" alt="your image" /><br>
+             <button type="button" class="btn btn-block btn-lg all-border upload_btn_new glyphicon glyphicon-plus text-center" onchange="readURL_new(this);"></button>
+           </li>
+           <li>  
+            <br>
+            <button type="button" onclick="removeUpload_new()" class="btn btn-danger btn-sm remove-image_new  all-border">Remove <span class="image-title_new">Uploaded Image</span></button><br><br>
+            <span class="text-center image-title-no_new">Select Thumbnail of Video.</span>
+            </li>
+         </ul>  
+          <ul class="list list-unstyled upload-i_v_wrapper1" style="display: inline-flex;">
+           <li>
+             <input class="file-upload-input1" type='file' onchange="readURL1(this);"  accept="video/*" hidden="hidden" style="display: none;" name="file-upload-video" />
+            <video  id="vid_1" src="" data-ckin="default" data-overlay="1"  class="all-border"   controls="">
+         </video>
+             <button type="button" class="btn btn-block btn-lg all-border upload_btn1 glyphicon glyphicon-plus text-center" onchange="readURL1(this);"></button>
+           </li>
+           <li>  
+            <br>
+            <button type="button" onclick="removeUpload1()" class="btn btn-danger btn-sm remove-image1  all-border">Remove <span class="image-title1">Uploaded Image</span></button><br><br>
+            <span class="text-center image-title-no1">Select Video.</span>
+            </li>
+         </ul>
+         </div>
+          
+
+        
+           	  <div class="form-group">
+            <label for="Topic-Name" class="col-form-label ">Topic Name</label>
+            <input type="text" class="form-control all-border" id="Topic-Name" placeholder="" name="topic-name" required="">
+          </div>
+
+          
+
+           	<div class="form-group">
+            	<label for="Description" class="col-form-label">Description</label>
+            		  <textarea class="form-control all-border" id="Description" rows="5" name="topic-description" required=""></textarea>
+           	</div>
+
+          <button type="submit" class="btn btn-success btn-block">Upload</button>
+          </form>
+
+		</div> 
+		</div>
+	 </div> 
+	 <div class="col-md-3"></div>
+</div>
+
+	</div>
+	
+
+
+
+
+
+  <script>
+$(document).ready(function(){
+
+     $('.largenav li:nth-child(5)').addClass("active");
+    $('.upload_btn').click(function(){
+        $('.file-upload-input').click();
+    });
+     $('.upload_btn_new').click(function(){
+        $('.file-upload-input_new').click();
+    });
+      $('.upload_btn1').click(function(){
+        $('.file-upload-input1').click();
+    });
+     $('#upload_video *').attr('disabled',true);
+      $('#upload_img *').attr('disabled',true);  
+
+$('[name="options"]').on('change',function()
+{
+    if($(this).val()==="opt_1" )
+    {
+     
+      $('#upload_video *').attr('disabled',true);
+      $('#upload_img *').attr('disabled',false);
+    }
+    else
+    {
+      
+      $('#upload_img *').attr('disabled',true);
+      $('#upload_video *').attr('disabled',false);
+    }
+});
+   
+});
+
+ function readURL(input)
+    {
+               if (input.files && input.files[0]) {
+
+            var reader = new FileReader();
+
+          reader.onload = function(e) {
+            $('.upload_btn').hide();
+             $('.image-title-no').hide();
+            $('.file-upload-image').attr('src', e.target.result);
+            $('.file-upload-image').show();
+            $('.remove-image').show();
+           
+            $('.image-title').html(input.files[0].name);
+          };
+
+          reader.readAsDataURL(input.files[0]);
+
+        } else {
+          removeUpload();
+        }
+    }
+
+    function removeUpload()
+    {
+         $('.file-upload-input').replaceWith($('.file-upload-input').clone());
+         $('.file-upload-image').attr('src','');
+        $('.file-upload-image').hide();
+        $('.remove-image').hide();
+        $('.upload_btn').show();
+         $('.image-title-no').show();
+    } 
+    function readURL_new(input)
+    {
+               if (input.files && input.files[0]) {
+
+            var reader = new FileReader();
+
+          reader.onload = function(e) {
+            $('.upload_btn_new').hide();
+             $('.image-title-no_new').hide();
+            $('.file-upload-image_new').attr('src', e.target.result);
+            $('.file-upload-image_new').show();
+            $('.remove-image_new').show();
+           
+            $('.image-title_new').html(input.files[0].name);
+          };
+
+          reader.readAsDataURL(input.files[0]);
+
+        } else {
+          removeUpload_new();
+        }
+    }
+
+    function removeUpload_new()
+    {
+         $('.file-upload-input_new').replaceWith($('.file-upload-input_new').clone());
+         if($('.file-upload-image_new').attr('src') == $('#vid_1').attr('poster'))
+         {
+            $('#vid_1').attr('poster','');
+         }
+         $('.file-upload-image_new').attr('src','');
+        $('.file-upload-image_new').hide();
+        $('.remove-image_new').hide();
+        $('.upload_btn_new').show();
+         $('.image-title-no_new').show();
+    } 
+
+      function readURL1(input)
+    {
+               if (input.files && input.files[0]) {
+
+            var reader = new FileReader();
+
+          reader.onload = function(e) {
+            $('.upload_btn1').hide();
+             $('.image-title-no1').hide();
+             if($('#file-upload-image_new').attr('src') != '')
+             { 
+              $('#vid_1').attr('poster',$('.file-upload-image_new').attr('src'));
+            }
+            else
+            {
+               $('#vid_1').attr('poster','');
+            }
+           
+            $('#vid_1').attr('src', e.target.result);
+            $('#vid_1').show();
+            $('.remove-image1').show();
+           
+            $('.image-title1').html(input.files[0].name);
+          };
+
+          reader.readAsDataURL(input.files[0]);
+
+        } else {
+          removeUpload1();
+        }
+    }
+
+    function removeUpload1()
+    {
+         $('.file-upload-input1').replaceWith($('.file-upload-input1').clone());
+
+        $('#vid_1').hide();
+        $('#vid_1').attr('src','');
+        $('.remove-image1').hide();
+        $('.upload_btn1').show();
+         $('.image-title-no1').show();
+    } 
+
+    </script>
+	{% endblock %}

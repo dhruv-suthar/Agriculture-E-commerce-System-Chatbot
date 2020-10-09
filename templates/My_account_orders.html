@@ -1,0 +1,126 @@
+{% extends 'layout.html' %}
+
+{% block body %}
+<section class="my_account" style="padding-top: 100px;">
+  
+
+    <div class="container">
+      <div class="row">
+        <div class="col-md-3 col-sm-12 col-xl-12">
+          <div class="panel panel-success all-border bg ">
+            <div class="panel-body">
+               <div class="profile_container">
+                  
+                  <div class="row">
+                    <div class="col-md-5 col-sm-5 col-xl-5">
+                      {% if get_user_data.user_profile != 'Farmer.jpg' %}
+                      <img src="static/img/SERVER_FILES/users/{{ get_user_data.user_profile }}" class="img-rounded Farmer-login-icon" name="user_img">
+                      {% else %}
+                        <img src="static/img/icons/{{ get_user_data.user_profile }}" class="img-rounded Farmer-login-icon" name="user_img">
+                      {% endif %}
+                    </div>
+                    <div class="col-md-7 col-sm-7 col-xl-7">
+                      <p>Hello</p>
+                      <h4 name="user_name">{{ session.s_name }}</h4>
+                    </div>
+                  </div>
+               </div>
+            </div>
+           
+          </div>
+
+         
+              <div class="list-group my_account_links all-border">
+                <a href="/user-profile" class="list-group-item ">My Profile</a>
+                <a href="/user-orders" class="list-group-item active">Orders</a>
+                <a href="/user-wishlists" class="list-group-item">Wishlists</a>
+                <a href="/logout" class="list-group-item all-border">Logout</a>
+              </div>
+        
+        
+        </div>
+
+        <div class="col-md-9 col-sm-12 col-xl-12" >
+          <div class="panel panel-success all-border bg ">
+            <div class="panel-body">
+             <h3>Orders</h3>
+             <hr>
+              
+            <div class="orders crop-description-scroll" style="height: 400px; overflow-y: scroll;scroll-behavior: smooth;" >
+              {% if user_orders %}
+               <ul class="order_product_list" style="padding-bottom: 2px;" style="width: 100%;">
+
+                {% for user_orders in user_orders %}
+           <li id="product1  " class="inline">
+            <div class="row" >
+              <div class="col-md-2 col-xl-2 col-sm-2 inline">
+                <img src="static/img/SERVER_FILES/products/{{ user_orders.products.product_img }}" alt="..." class="img-responsive" name="product_img" />
+              </div>
+
+               <div class="col-md-8 col-xl-8 col-sm-8 inline ">
+                <p name="product_lb">{{ user_orders.products.product_name }} &nbsp;&nbsp;
+                  {% if user_orders.is_cancelled == 0 %}
+                  <span class="badge badge-info all-border">{{ user_orders.orders.order_status }}</span>
+                  {% endif %}
+                </p>
+                <p name="proudt_order_qty"><span style="font-style: bold;">Qty :</span>{{ user_orders.quantity }}</p>
+                  <p name="order_date">Order Date: &nbsp;<strong>{{ user_orders.orders.order_date }}</strong></p>
+              </div>
+
+                <div class="col-md-2 col-xl-2 col-sm-2">
+              <p class="" name="product_t_price">₹{{ user_orders.orders.order_total_amt }}</p>
+              {% if user_orders.is_cancelled == 0  %}
+              {% if user_orders.orders.order_status != 'Completed' %}
+              <button class="btn btn-sm btn-danger  all-border cancel_order" id="{{ user_orders.order_product_id }}">Cancel Order</button>
+              {% endif %}
+              {% else %}
+              <p class="text-danger">Cancelled</p>
+              {% endif %}
+              </div>
+
+            </div>
+          </li>
+        {% endfor %}
+          </ul>
+          {% else %}
+           <a  href="/products" class="btn btn-block btn-success  all-border  center-block" id="">Continue Shopping</a>
+          {% endif %}
+            </div>
+    
+            </div>
+           
+          </div>
+
+     
+        
+        </div>
+
+
+     </div>   
+
+    </div>
+</section>
+<script>
+  $(document).ready(function()
+  {
+    $('.cancel_order').click(function(event)
+    {
+       console.log($(this).attr('id'));
+        $.ajax({
+                url:'/user-orders',
+                 data:
+                {
+                  'cancel_order_id':$(this).attr('id')
+                     
+                },
+                success:function(response)
+                {
+                              location.reload();
+                              console.log("data is deleted");
+                }
+              });
+      event.preventDefault();
+    });
+  });
+</script>
+{% endblock %}	

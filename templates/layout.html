@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta icon="utf-8">
+  
+	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
+	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/new_style.css') }}?q=1280549780">
+  <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/ckin.css') }}?q=1280549780">
+  <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/placeholder_like_fb.css') }}?q=1280549780">
+  <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/chatbot.css') }}?q=1280549780">
+
+  <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/Checkbox_Radio.css') }}?q=1280549780">
+  <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/range_slider.css') }}?q=1280549780">
+  <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/New_Range_Slider.css') }}?q=1280549780">
+   <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/nouislider.min.css') }}?q=1280549780">
+
+     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/font-awesome.min.css') }}?q=1280549780">
+
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Crimson+Text|Lato|Mukta+Vaani" >
+  
+
+	<link rel="stylesheet" href="{{ url_for('static',filename='css/owl.carousel.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static',filename='css/owl.theme.default.min.css') }} ">
+
+    <script  src="{{ url_for('static',filename='js/jquery-3.3.1.min.js') }}"></script>
+    <script src="{{ url_for('static',filename='js/owl.carousel.js') }}"></script>
+   
+
+	
+
+	<title>Agrostar</title>
+  <style type="text/css">
+    .crop-description-scroll::-webkit-scrollbar { 
+                display: none; 
+            } 
+
+        .alert-bottom {
+  position: fixed;
+ 
+  min-width: 150px;
+ 
+  text-align: center;
+  font-size: 90%;
+  border-radius: 0.5px;
+  box-shadow: 0 1px 10px -3px #004e75, 0 1px 5px -3px #004e75;
+  animation: pakibot 550ms linear;
+  z-index: 999;
+}
+
+.alert-bottom{
+  border: 0.5px solid  #5fbf5f;
+  background-color: #5fbf5f;
+  color: #fff;
+}
+
+@-webkit-keyframes pakibot {
+    0%{
+        opacity: 0;
+        transform: translateX(180%);
+    }
+    50%{
+        transform: translateX(-50%);
+    }
+    100%{
+        opacity: 1;
+        transform: translateX(0%);
+    }
+}
+@-moz-keyframes pakibot {
+    0%{
+        opacity: 0;
+        transform: translateX(180%);
+    }
+    50%{
+        transform: translateX(-50%);
+    }
+    100%{
+        opacity: 1;
+        transform: translateX(0%);
+    }
+}
+@keyframes pakibot { 
+    0%{
+        opacity: 0;
+        transform: translateX(180%);
+    }
+    50%{
+        transform: translateX(-50%);
+    }
+    100%{
+        opacity: 1;
+        transform: translateX(0%);
+    }
+}   
+.ntf-container {
+  
+  position: fixed;
+  top: 10px;
+  left: -290px;
+  width: 290px;
+  height: 90px;
+  background-color: $ntfbgc;
+  border-radius: 3px;
+  box-shadow: 2px 2px 5px 1px #777;
+  padding: 20px;
+  color: #fff;
+  font-size: 16px;
+  font-family: 'Roboto Condensed', 'Sans serif';
+  overflow: hidden;
+  
+}
+
+.notif-peek {
+  position: fixed;
+  bottom: -50px;
+  background-color: rgba(74,169,74,1);
+  padding: 12px 24px 17px 24px;
+  vertical-align: middle;
+  color: #fff;
+  box-shadow: 0 7px 18px rgba(0,0,0,0.2);
+  border-radius: 1px;
+  font-family: "Trebuchet MS", Helvetica, sans-serif;
+}
+.notif-peek {
+  -webkit-animation: peek 5s forwards;
+  -webkit-animation-delay: 0.5s;
+  animation: peek 5s forwards;
+  animation-delay: 500ms;
+}
+
+@-webkit-keyframes peek {
+      0% { bottom: -50px; }
+     10% { bottom: 80px; }  /*demo purposes; change to 20px*/
+     90% { bottom: 80px; }  /*demo purposes; change to 20px*/
+    100% {bottom: -50px;}
+}
+
+@keyframes peek {
+      0% { bottom: -50px; }
+     10% { bottom: 80px; }  /*demo purposes; change to 20px*/
+     90% { bottom: 80px; }  /*demo purposes; change to 20px*/
+    100% {bottom: -50px; }
+}
+
+  </style>
+</head>
+<body>
+
+  {% include 'includes/_navbar.html' %}
+<div class="container-fluid">
+   <div class="speech-toggler-main color-grey" style="float: right;" >
+  <div class="speech-toggler fa fa-microphone color-green"></div>
+</div>
+</div>
+  <div class="container-fluid">
+
+    {% block body %}{% endblock %}
+ 
+	</div>
+	
+	
+
+
+<span id="speech"></span>
+<span id="interim"></span>
+
+<!-- Footer -->
+
+<footer class="page-footer font-small blue ">
+
+    <!-- Footer Links -->
+    <div class="container-fluid text-center text-md-left">
+
+      <!-- Grid row -->
+      <div class="row">
+
+      
+
+       
+
+        <!-- Grid column -->
+        <div class="col-md-4 mb-md-0 mb-3">
+
+            <!-- Links -->
+            <h5 class="text-uppercase">About</h5>
+
+            <ul class="list-unstyled">
+              <li>
+                <a href="" class="">About Us</a>
+              </li>
+              <li>
+                <a href="#!">Blog</a>
+              </li>
+              
+            </ul>
+
+
+          </div>
+          <!-- Grid column -->
+
+          <!-- Grid column -->
+          <div class="col-md-4 mb-md-0 mb-3">
+
+            <!-- Links -->
+            <h5 class="text-uppercase">Help</h5>
+
+            <ul class="list-unstyled">
+              <li>
+                <a href="#!">Contact Us</a>
+              </li>
+             
+            </ul>
+
+          </div>
+          <!-- Grid column -->
+
+             <!-- Grid column -->
+          <div class="col-md-4 mb-md-0 mb-3">
+
+            <h5 class="text-uppercase">Connect</h5>
+
+            <ul class="list-unstyled social">
+              <li class="facebook">
+                <a href=""><span> </span></a>
+              </li>
+              <li class="twitter">
+                <a href="#!"><span></span></a>
+              </li>
+               <li class="instagram">
+                <a href="#!"><span></span></a>
+              </li>
+              <li class="youtube">
+                <a href="#!"><span></span></a>
+              </li>
+            </ul>
+
+
+          </div>
+          <!-- Grid column -->
+
+
+
+
+      </div>
+      <!-- Grid row -->
+
+    </div>
+    <!-- Footer Links -->
+
+    <!-- Copyright -->
+    <div class="footer-copyright text-center py-3">© 2018 Copyright:
+      <a href="https://mdbootstrap.com/education/bootstrap/"> VD</a>
+    </div>
+    <!-- Copyright -->
+  </footer>
+  <audio >
+        <source src="/static/speech.ogg" type="audio/mpeg">
+        
+        Your browser does not support the HTML5 audio element.
+    </audio>
+  <!-- Footer -->
+    <script src="{{ url_for('static',filename='js/ckin.min.js') }}"></script>
+	<script type="text/javascript" src="{{ url_for('static',filename='js/bootstrap.min.js') }}"></script>
+  <script type="text/javascript" src="{{ url_for('static',filename='js/bootstrap-notify.min.js') }}"></script>
+  <script type="text/javascript" src="{{ url_for('static',filename='js/New_Range_Slider.js') }}"></script>
+    <script>
+      $(document).ready(function() {
+          
+
+          $('.thumbnail-product').hide();
+           $('.caption').children('.product_lb').hide();
+    $('a').children('.product_lb').hide();
+   
+    $('.caption ').children('.product_des').hide();
+  
+    
+
+     console.log($('.linear-background').css('width'));
+
+      
+    
+    $(window).scroll(function()
+    {
+          var scrollpos=$(window).scrollTop();
+          console.log(scrollpos);
+          var obj_pos=$('.thumbnail').scrollTop();
+          console.log(obj_pos);
+          var o_p=obj_pos;
+
+           if ($(this).scrollTop())
+          {
+         
+          setInterval(function()
+      { 
+        $('.linear-background').remove();
+        $('.linear-product-lb').remove();
+        $('.linear-product-des').remove();
+    
+          $('.thumbnail-product').fadeIn('slow'); 
+        $('.product_lb').fadeIn('slow');
+        $('.product_des').fadeIn('slow');
+        $('.product_btn').fadeIn('slow');
+      },1000);
+      }
+    });
+
+         
+
+
+ 
+
+      function upgrade() {
+      alert('Please upgrade to Google Chrome for best possible experience.');
+    }
+    window.onload = function() {
+      if (!(window.webkitSpeechRecognition) && !(window.speechRecognition)) {
+        upgrade();
+      } else {
+
+        var speech = new webkitSpeechRecognition() || speechRecognition();
+        speech.lang = 'en-US';
+        speech.continuous = true;
+        speech.interimResults = true;
+        var recognizing,
+            final_transcript,
+            interim_transcript,
+            transcription = document.getElementById('speech'),
+            interim_span = document.getElementById('interim');
+        interim_span.style.opacity = '0.5';
+        function reset() {
+          transcription.innerHTML = '';
+          interim_span.innerHTML = '';
+          recognizing = false;
+        }
+        document.onkeydown = function(e) {
+          if (e.key === "q") {
+            if (!recognizing) {
+              speech.start();
+            }
+          }
+        };
+        document.onkeyup = function(e) {
+          if (e.key === "q") {
+            if (recognizing) {
+              speech.stop();
+              reset();
+            }
+          }
+        };
+        speech.onstart = function() {
+            // When recognition begins
+            recognizing = true;
+            console.log("Speaking!");
+        };
+        
+         $('.speech-toggler-main').click(function()
+            {
+                $(this).toggleClass('color-grey color-red');
+                $('.speech-toggler').toggleClass('color-green color-white');
+             
+               if($(this).is('.color-red'))
+               {
+               
+                 speech.start();
+                  $('audio')[0].play();
+               
+               }
+               else
+               {
+               
+                  speech.stop();
+                  $('audio')[0].play();
+                   
+               }
+            });
+        speech.onresult = function(event) {
+            // When recognition produces result
+            interim_transcript = '';
+            final_transcript = '';
+            // main for loop for final and interim results
+            for (var i = event.resultIndex; i < event.results.length; ++i) {
+              if (event.results[i].isFinal) {
+                final_transcript += event.results[i][0].transcript;
+              } else {
+                interim_transcript += event.results[i][0].transcript;
+              }
+            }
+            transcription.innerHTML = final_transcript;
+            interim_span.innerHTML = interim_transcript;
+            var makeArray = final_transcript.split(' ');
+            var bColor = makeArray.splice(-3);
+            // change background color
+            if ((/^change /g.test(final_transcript)) && (/background colour/g.test(final_transcript))) {
+              if (bColor[0] === 'to') {
+                document.body.style.backgroundColor = bColor[1] + bColor[2];
+              } else if (bColor[1] === 'to') {
+                document.body.style.backgroundColor = bColor[2];
+              } else {
+                document.body.style.backgroundColor = bColor[0] + bColor[1] + bColor[2];
+              }
+            }
+            if(final_transcript == 'go to Products' || final_transcript == 'go to products' || final_transcript == "show me a products" || final_transcript == "show me Products" || final_transcript == 'Products' || final_transcript == 'products')
+            {
+              window.location.href = '/products';
+            }
+            else if(final_transcript == 'go to Crops' || final_transcript == 'go to crops' || final_transcript == "show me a crops" || final_transcript == "show me Crops" || final_transcript == 'Crops' || final_transcript == 'crops')
+            {
+              window.location.href = '/Crops';
+            }
+            else if(final_transcript == 'go to Weather info' || final_transcript == 'go to weather info' || final_transcript == "show me a weather info" || final_transcript == "show me Weather info" || final_transcript == 'Weather info' || final_transcript == 'weather info')
+            {
+              window.location.href = '/weather';
+            }
+            else if(final_transcript == 'go to Farming info' || final_transcript == 'go to farming info' || final_transcript == "show me a farming info" || final_transcript == "show me Farming info" || final_transcript == 'Farming info' || final_transcript == 'farming info')
+            {
+              window.location.href = '/Farming-info';
+            }
+            else if(final_transcript == 'go to E learn' || final_transcript == 'go to E learn' || final_transcript == "show me a E learn" || final_transcript == "show me E learn" || final_transcript == 'E learn' || final_transcript == 'E learn')
+            {
+              window.location.href = '/E-learn';
+            }
+            else if(final_transcript == 'go to Ask questions' || final_transcript == 'go to ask questions' || final_transcript == "show me a ask questions" || final_transcript == "show me Ask questions" || final_transcript == 'Ask questions' || final_transcript == 'ask questions')
+            {
+              window.location.href = '/ask-questions';
+            }
+        };
+        speech.onerror = function(event) {
+            // When recognition fails or error occurs
+            console.error(event.error); 
+        };
+        speech.onend = function() {
+            // When recognition ends
+            console.log("Hold 'Q' to begin speech.");
+            reset();
+        };
+      }
+    };
+   });
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,204 @@
+  {% extends 'pages/layout.html' %}
+  {% block body %}
+  <div id="page-wrapper">
+                <div class="container-fluid">
+                    <div class="row">
+                       <div class="col-lg-12">
+                           <ol class="breadcrumb " style="margin-top: 30px;font-size: 15px;background-color: none;">
+                            <li><a href="#">Dashboard</a></li>
+                            <li class="active">Product Management</li>
+                            <li class="active">View / Update / Delete Products</li>
+                        </ol>
+                        <hr>
+                       </div>
+                    </div>
+                    <!-- /.row -->
+
+                    <div class="row">
+                        <div class="col-sm-1"></div>
+                        <div class="col-sm-10 center-block">
+                           {% include 'includes/_messages.html' %}
+             <div class="Update-product-panel panel panel-default">
+                                <div class="panel-heading">Add Product</div>
+                            
+                            <div class=" panel-body">
+                           
+
+                                 <form  method="post" action="" enctype="multipart/form-data" >
+                                  <label class="image-upload" id=""></label>
+
+                                   <input type="hidden" name="product_id" value="">
+                                      <div class="form-group inline">    
+                                         <ul class="list list-unstyled upload-i_v_wrapper" style="display: inline-flex;">
+                        
+                                           <li>
+                                           
+                                           
+                                              <input class="file-upload-input" type='file'  onchange="readURL(this);" accept="image/*" hidden="hidden" style="display: none;" name="file-upload-image" value=" " required />
+                                             
+                                             <img class="img-circle file-upload-image img-responsive   all-border " src="" alt="your image"  style="display: none;" /><br>
+                                             <button type="button" class="btn btn-block btn-lg all-border upload_btn glyphicon glyphicon-plus text-center" onchange="readURL(this);"  style="display: block;"></button>
+
+                                           </li>
+                                           <li>  
+                                            <br>
+                                            <button type="button" onclick="removeUpload()" class="btn btn-danger btn-sm remove-image  all-border" style="display: none;">Remove <span class="image-title">Uploaded Image</span></button><br><br><br><br><br>
+                                            <span class="text-center image-title-no" style="display: block;">Upload Image.</span>
+                                            </li>
+                                         
+                                              
+                                           
+                                         </ul>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-sm-6">
+
+                                                <div class="form-group">
+                                                    <label for="Product_Category" class="col-form-label ">Product Category</label>
+                                                    <select class="form-control all-border" placeholder="user" name="product_category" required="">
+                                                      {% for product_category in product_category %}
+                                                       
+                                                         <option value="{{ product_category.product_category_id }}">{{ product_category.product_category_name }}</option>
+                                                       
+                                                        
+                                                      {% endfor %}
+                                                    </select>
+                                                </div>
+
+                                                <div class="form-group">
+                                                      <label for="Product_Name" class="col-form-label ">Product Name</label>
+                                                    <input type="text" class="form-control all-border" id="Product_Name" placeholder="Talpatri" name="product_name" value="" required="">
+                                                </div>
+
+                                                <div class="form-group">
+                                                      <label for="Product_Quantity" class="col-form-label ">Product Quanity</label>
+                                                    <input type="number" class="form-control all-border" id="Product_Quantity" placeholder="" name="product_stock" value="" required="">
+                                                </div>
+
+                                                  <div class="form-group">
+                                                      <label for="Product_Price" class="col-form-label ">Product Price</label>
+                                                    <input type="number" class="form-control all-border" id="Product_Price" placeholder="" name="product_price" value="" required="">
+                                                </div>
+
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <div class="form-group">
+                                                      <label for="Product_Description" class="col-form-label ">Product Description</label>
+                                                      <textarea class="form-control" rows="4" id="Product_Description" name="product_description" placeholder="" required=""></textarea>
+                                                </div>
+
+                                              <div class="form-group">
+                                                  <label for="Relatd_Crop" class="col-form-label ">Related Crop</label>
+                                               
+                                                <textarea class="form-control" rows="4" id="Product_Description" name="related_crop" placeholder="" required=""></textarea>   
+                                              </div>
+
+                                                <div class="form-group">
+                                                     <label for="Brand" class="col-form-label ">Brand</label>
+                                                     
+                                                    <select class="form-control all-border" placeholder="" name="brand_name" required="">
+                                                      {% for brand_data in brand_data %}
+                                                     
+                                                          <option value="{{ brand_data.brand_id }}" >{{ brand_data.brand_name }}</option>
+                                                       
+                                                      {% endfor %}
+                                                      
+                                                    </select>
+                                                    
+                                                </div>
+
+                                                  <button type="submit" class="btn btn-primary btn-block">Add</button>
+                                            </div>
+                                        </div>
+                                        
+                                 </form>
+                                 </div>
+    </div>
+  </div>
+    <div class="col-sm-1">
+  </div>
+    </div>
+   
+
+            
+                   
+
+
+                </div>
+                <!-- /.container-fluid -->
+
+            </div>
+
+        <script>
+
+
+/*$(document).ready(function(){
+
+  
+    $('.upload_btn').click(function(){
+        $('.file-upload-input').click();
+           console.log('data -add');
+
+    });*/
+    $(document).ready(function(){
+        $('.nav li:nth-child(3)').addClass("active");
+    $('.upload_btn').click(function(){
+      console.log('data-add');
+        $('.file-upload-input').click();
+
+       
+
+        
+    });
+
+  });
+ 
+  
+
+   
+
+
+ 
+ function readURL(input)
+    {
+            if (input.files && input.files[0]) {
+
+            var reader = new FileReader();
+              console.log('data -add');
+          reader.onload = function(e) {
+            $('.upload_btn').hide();
+             $('.image-title-no').hide();
+            $('.file-upload-image').attr('src', e.target.result);
+            $('.file-upload-image').show();
+            $('.remove-image').show();
+           
+            $('.image-title').html(input.files[0].name);
+          };
+
+          reader.readAsDataURL(input.files[0]);
+          console.log("successfully file getted");
+
+        } else {
+          removeUpload();
+        }
+    }
+
+    function removeUpload()
+    {
+        console.log('data -remove');
+         // $('.file-upload-input').replaceWith($('.file-upload-input').val('').clone(true));
+           $('.file-upload-input').replaceWith($('.file-upload-input').clone());
+         $('.file-upload-input').val('');
+
+        $('.file-upload-image').hide();
+        $('.remove-image').hide();
+        $('.upload_btn').show();
+         $('.image-title-no').show();
+    } 
+
+    </script>
+        
+
+
+{% endblock %}

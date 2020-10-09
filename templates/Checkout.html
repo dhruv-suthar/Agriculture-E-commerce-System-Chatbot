@@ -1,0 +1,247 @@
+{% extends 'layout.html' %}
+
+
+{% block body %}
+ <section id="checkout">
+   <div class="container">
+     <div class="row ">
+
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  &nbsp;&nbsp;&nbsp;<h3>Order Checkout</h3>
+       <div class="col-md-8 " style="padding-bottom: 10px;">
+
+         
+
+          <div class="checkout_tab  all-border panel panel-success" > 
+           
+         
+
+
+          <div class="panel panel-success all-border order_sub_tab" >
+             <div class="panel-heading " data-toggle="collapse" data-target="#order_address" aria-expanded="true" >
+
+              <h4>1. Order Address</h4>
+              
+            </div> 
+            
+            <div class="panel-body collapse in" id="order_address">
+              {% from "includes/_formhelpers.html" import render_field %}
+      
+              <form name="order_address" method="post" >
+
+                  <div class="form-group">
+                    {{ render_field(form.name , class_='form-control all-border') }}
+                 </div>
+
+                 <div class="form-group">
+                   {{ render_field(form.order_alt_mobile_no , class_='form-control all-border') }}
+                 </div>
+              
+
+
+            <div class="form-group">
+                  {{ render_field(form.user_city , class_='form-control all-border') }}
+            </div>
+
+
+          <div class="form-group">
+             {{ render_field(form.user_state , class_='form-control all-border') }}
+            </div>
+
+
+              <div class="form-group">
+                {{ render_field(form.order_delivery_address , class_='form-control all-border') }}
+            </div>
+
+                 <button type="button" class="v_order btn btn-success pull-right" >Next</button>
+          
+            </div>
+
+          </div>
+
+
+
+          <div class="panel panel-success all-border order_sub_tab">
+             <div class="panel-heading" data-toggle="collapse" data-target="#payment_options" aria-expanded="true" >
+
+              <h4>2. Payment Options</h4>
+              
+            </div> 
+
+           <div class="panel-body collapse" id="payment_options">
+           
+                <div class="form-check">
+              <label>
+                 <input type="radio" name="payment_options" id="opt_1" data-toggle="collapse" data-target="#Debit_Card_Info" value="1"> <span class="label-text">Debit / ATM Card</span>
+              </label>
+              </div>
+
+
+
+              <div  id="Debit_Card_Info" class="panel-collapse collapse">
+              <!-- <form method="post" name="debit_card_details">
+               <div class="form-group">
+               <label for="card_holder_name" class="col-form-label ">Card Holder's Name</label>
+               <input type="text" class="form-control all-border" id="card_holder_name" placeholder="" name="card_holder_name">
+              </div>
+
+
+                <div class="form-group">
+               <label for="card_number" class="col-form-label">Card Number</label>
+               <div class="input-group">
+               <input type="tel" class="form-control all-border" id="card_holder_number"  placeholder="" name="card_card_number">
+               <span class="input-group-addon glyphicon glyphicon-credit-card all-border mb-1"></span>
+               </div>
+              </div>
+
+                <div class="row">
+                  <div class="col-md-6 col-xl-6 col-sm-6">
+                     <div class="form-group">
+                   <label for="Exp_Date" class="col-form-label ">Exp Date</label><br>
+                   <ul class="list-unstyled inline" style="display: inline-flex;">
+                    <li><input type="tel" class="form-control all-border inline text-center" id="MM" placeholder="MM" style="width: 55px;" name="card_exp_mm"></li>
+                    <li> <span class="lead"> / </span> </li>
+                     <li><input type="tel" class="form-control all-border inline text-center" id="YY" placeholder="YY" style="width: 55px;" name="card_exp_yy"></li>
+                     </ul>
+                   </div>
+                  </div>
+
+                  <div class="col-md-3 col-xl-3 col-sm-3">
+                    <div class="form-group">
+                      <label for="CVC_Code" class="col-form-label ">CVC Code</label>
+                        <div class="input-group">
+                       <input type="tel" class="form-control all-border" id="CVC_Code"  placeholder="CVC" name="cvc">
+                       <span class="input-group-addon glyphicon glyphicon-question-sign all-border mb-1"></span>
+                       </div>
+                    </div>
+                  </div>
+
+                  <div class="col-md-3 col-sm-3 col-xl-3">
+                     <button type="button" class="btn btn-success btn-block" style="margin-top: 28px;" data-toggle="modal" data-target="#Verify_Credit_Card_info" data-backdrop="false" id="verify_payment_details">Pay</button>
+                  </div>
+                </div>
+                </form>-->
+              </div>
+
+
+               <div class="form-check">
+              <label>
+                 <input type="radio" name="payment_options" id="opt_2" value="2"> <span class="label-text">Cash On Delivery</span>
+              </label>
+              </div>
+
+        
+              <div class="Confirm_btn">
+                 <button type="submit" class="btn btn-success pull-right" id="Confirm_order" disabled="">Confirm Order</button>
+              </div>
+              </form>
+
+           </div>
+
+          </div>
+
+
+
+
+           </div>
+
+           
+       </div>
+
+
+       <div class="col-md-4 ">
+         <div class="panel panel-success" style="border-radius: 0.5px;padding: 0px 10px 0px 10px;">
+          <h3>Order Summary</h3>
+          <hr>
+          <p class="large">Price :({{ total_order_product }}) items<span class="pull-right" name="total_amt">₹{{ t_c_amt }}</span></p>
+          <p class="large">Amount Payable<span class="pull-right" name="total_amt_payment">₹{{ t_c_amt }}</span></p>
+
+          <hr>
+
+          <ul class="product_list" style="padding-bottom: 2px;">
+              {% for c_details in orders_details %}
+           <li id="{{ c_details.order_product_id  }}"><div class="row" style="display: inline-flex;">
+              <div class="col-md-3 col-xl-3 col-sm-3 inline">
+                <img src="/static/img/SERVER_FILES/products/{{ c_details.products.product_img }} " alt="..." class="img-responsive" name="product_img1" />
+              </div>
+
+               <div class="col-md-8 col-xl-8 col-sm-8 inline">
+                <p name="product_lb1">{{ c_details.products.product_name }}</p>
+                <p name="product_qty1"><span style="font-style: bold;">Qty :</span>{{ c_details.quantity }}</p>
+              </div>
+
+                <div class="col-md-1 col-xl-1 col-sm-1">
+              <p class="pull-right" name="product_t_price1">₹{{ c_details.products.product_price * c_details.quantity}}</p>
+              </div>
+
+            </div>
+          </li>
+           {% endfor %}
+          </ul>
+
+         </div>
+       </div>
+
+
+     </div>
+   </div>
+ </section>
+
+
+   <script>
+    $(document).ready(function(){
+      var form_data_filled= false;
+      $('.v_order').click(function(e)
+      {
+
+        $.ajax({
+                type: "POST",
+                url: '/verify_order_address',
+                data: $('form[name="order_address"]').serialize(), // serializes the form's elements.
+                success: function (data) {
+                  //$('form[name="order_address"]').html($(data).find('form[name="order_address"]'));
+                     console.log("data successfully sended");
+                     // display the returned data in the console.
+                    $('#order_address').removeClass(' in');
+                   $('#payment_options').addClass(' in');
+                   form_data_filled = true;
+                }
+            });
+            e.preventDefault(); 
+      });
+       $('input[name="payment_options"]').change(function(event)
+      {
+         if($('input[name="payment_options"]').attr('id','opt_1') && form_data_filled == true)
+         {
+           $('#Confirm_order').attr('disabled',false);
+            $('#Confirm_order').submit();
+
+
+
+
+         }
+
+      });
+      /* $('#Confirm_order').submit(function(e)
+       {
+            $.ajax({
+                type: "POST",
+                url: '/checkout',
+                data: $('form[name="finalize_order"]').serialize(), // serializes the form's elements.
+                success: function (data) {
+                  console.log('successfully');
+                     // window.location.href = "/";
+                    
+                }
+            });
+       });*/
+
+    $("#opt_1").click(function(){
+        $("#Debit_Card_Info").collapse('show');
+    });
+    $("#opt_2").click(function(){
+        $("#Debit_Card_Info").collapse('hide');
+    });
+    });
+  </script>
+
+  {% endblock %}

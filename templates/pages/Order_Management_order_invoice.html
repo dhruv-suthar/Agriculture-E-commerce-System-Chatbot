@@ -1,0 +1,143 @@
+{% extends 'pages/layout.html' %}
+
+{% block body %}
+
+        <div id="page-wrapper">
+                <div class="container-fluid">
+                    <div class="row">
+                       <div class="col-lg-12">
+                           <ol class="breadcrumb " style="margin-top: 30px;font-size: 15px;background-color: none;">
+                            <li><a href="#">Dashboard</a></li>
+                            <li class="active">Order Management</li>
+                             <li class="active">Order Invoice</li>
+                          
+                        </ol>
+                        <hr>
+                       </div>
+                    </div>
+                    <!-- /.row -->
+
+                    <ul class="nav nav-tabs">
+                       <li class="nav-item  ">
+                        <a class="nav-link " href="/admin/order-mng/order-info/{{ payment_details.order_id }}">Order Info</a>
+                      </li>
+                      <li class="nav-item active">
+                        <a class="nav-link" href="/admin/order-mng/order-invoice/{{ payment_details.order_id }}">Invoice</a>
+                      </li>
+                       <li class="nav-item  pull-right ">
+                        <button class="btn btn-print btn-primary print-invoice">Print invoice</button>
+                      </li>
+                      
+                    </ul>
+                     
+                     <div class="order_info">
+                     <div class="row">
+                       <div class="col-md-6 col-xl-6 col-sm-6">
+                <h2>Invoice #{{ payment_details.order_id }}</h2>
+                <p>Orderd on <strong>{{ payment_details.orders.order_date }}</strong></p>
+                  <p>Order by {{payment_details.orders.users.user_full_name }}</p>
+                </div>
+                <div class="col-md-6 col-xl-6 col-sm-6">
+                   
+                    <img src="/static/img/Agrostar.png" class="img-responsive pull-right" style="height: 50px;width: 160px;margin-top:-100px;">
+
+                </div>
+            </div>
+                      
+                        <div class="row">
+                         
+                             <div class="col-md-6 col-sm-6 col-xs-6 clearfix">
+                                  <h3>Shipping Adddress</h3>
+
+                       
+                                    <address>
+                                     {{ payment_details.orders.name }}<br>
+                                     {{ payment_details.orders.order_delivery_address }}<br>
+                                     {{ payment_details.orders.city.city_name }}<br> 
+                                     {{ payment_details.orders.city.state.state_name }}<br>
+                                   
+                                    </address>
+                            
+                           
+                        
+                              </div>
+                             
+                              <div class="col-md-6">
+                                  <h3>Payment Information</h3>
+                       
+                            <strong>Payment Method :</strong>{{ payment_details.payment_method }}<br> 
+                            {% if payment_details.payment_method == 'Debit / ATM Card' %}
+                            <strong>Transaction Id: </strong>{{ payment_details.transaction_id }}<br>
+                            {% endif %}
+                            
+                           
+                    
+                              </div>
+                          </div>
+
+                            
+
+                         
+                         
+                              <h2>Order products</h2>
+                              <table class="table table-hover table-condensed all-border">
+               <thead>
+                 <th>Product</th>
+                 <th>Price</th>
+                 <th>Qty</th>
+                 <th >Total</th>
+               </thead>
+               <tbody>
+            
+                
+                {% for order_detail_data in order_detail_data %}
+                 <tr>
+                   <td name="product_lb1">{{ order_detail_data.products.product_name }}
+                      {% if order_detail_data.is_cancelled == 1 %}
+                    <br>
+                    <span class="badge badge-info all-border">Cancelled</span>
+                    {% endif %}
+                   </td>
+                   <td name="product_price1">{{ order_detail_data.products.product_price }}</td>
+
+                   <td name="product_qty1">{{ order_detail_data.quantity }}</td>
+                   <td name="product_t_price1"><span>₹</span>{{ order_detail_data.products.product_price * order_detail_data.quantity  }}</td>
+                 </tr>
+                 {% endfor %}
+                  
+              
+               </tbody>
+               <tfoot>
+                <tr>
+                 <td colspan="3"><strong>Total</strong></td>
+              
+                 <td><strong name="total_amt"><span>₹</span>{{ t_o_amt }}</strong></td>
+               </tr>
+               </tfoot>
+             </table>
+                         
+
+                      </div>
+
+
+    
+
+
+                </div>
+                <!-- /.container-fluid -->
+            </div>
+            <!-- /#page-wrapper -->
+            <script>
+                $(document).ready(function()
+                {
+                    $('.print-invoice').click(function()
+                    {
+
+                    $.print(".order_info"); 
+                    
+                    });
+                });
+            </script>
+{% endblock %}
+
+    

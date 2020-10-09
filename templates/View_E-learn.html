@@ -1,0 +1,85 @@
+{% extends 'layout.html' %}
+
+
+{% block body %}
+<br>
+<br>
+<br>
+<br>
+
+  <div class="container-fluid"  style="padding-top: 25px">
+    <div class="row row1">
+      <div class="col-md-8  all-border">
+         <video   id="vid_1" src="/static/img/SERVER_FILES/video-tutorials/{{ e_learn_v1.e_learn_video }}" data-ckin="default" data-overlay="1" data-title="{{ e_learn_v1.e_learn_name }}" class="all-border" name="e_learn_vid1" poster="/static/img/SERVER_FILES/video-tutorials/{{ e_learn_v1.e_learn_img_tmb }}">
+         </video>
+          <div class="linear-product-lb  all-border" style="width: 55px;margin:5px;">
+          
+              </div>
+          <h4 class="e_learn_lb ">{{ e_learn_v1.e_learn_name }}</h4>
+          <div class="linear-product-des  all-border" style="margin:5px;">
+          
+              </div>
+          <p class="e_learn_des ">{{ e_learn_v1.e_learn_description }}</p>
+      </div> 
+      <div class="col-md-4">
+
+       {% for e_learn_v in e_learn_vs %} 
+      <div class="row row2">
+       <div class="col-md-8 col-sm-8 col-xs-8  v_img_tmb">
+        <div class="linear-background  all-border" style="height: 150px;width: 262px;margin:5px;">
+          
+              </div>
+          <a href="/E-learn/{{ e_learn_v.e_learn_id }}" class="thumbnail text-success all-border thumbnail-product" >
+         
+          <img src="/static/img/SERVER_FILES/video-tutorials/{{ e_learn_v.e_learn_img_tmb }}" alt="" class="img-responsive" style="height: 150px;width: 250px;" name="e_learn_img2"> 
+           <span class="glyphicon glyphicon-play-circle text-center center-block" style="box-shadow: none;text-decoration: none; font-size: 50px;" ></span>
+          </a>         
+        </div>
+        <div class="col-md-4 col-sm-4 col-xs-4" style="height: 100px;">
+           <div class="linear-product-lb  all-border" style="width: 40px;margin:5px;">
+          
+              </div>
+          <h4 class="e_learn_lb">{{ e_learn_v.e_learn_name }}</h4>
+          <div class="linear-product-des  all-border" style="width:100px;margin:5px;">
+          
+              </div>
+          <p  style="width:100%;height: 110px; overflow-y: scroll;scroll-behavior: smooth;" class="crop-description-scroll e_learn_des">{{ e_learn_v.e_learn_description }}</p>
+        </div>
+    </div>
+    {% endfor %}
+
+      </div>
+    </div>
+</div>
+   
+
+
+
+
+
+	
+
+
+<script>
+    $(document).ready(function()
+  {
+    $('.largenav li:nth-child(6)').addClass("active");
+     $('.e_learn_lb').hide();
+     $('.e_learn_des').hide();
+      $(window).scroll(function()
+    {
+          if ($(this).scrollTop())
+          {
+                setInterval(function()
+              { 
+            $('.e_learn_lb').fadeIn();
+            $('.e_learn_des').fadeIn();
+          },1000);
+         }
+    });
+  })
+</script>
+{% endblock %}
+
+
+

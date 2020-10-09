@@ -1,0 +1,187 @@
+{% extends 'pages/layout.html' %}
+
+{% block body %}
+
+
+            <div id="page-wrapper">
+                <div class="container-fluid">
+                    <div class="row">
+                       <div class="col-lg-12">
+                           <ol class="breadcrumb " style="margin-top: 30px;font-size: 15px;background-color: none;">
+                            <li><a href="#">Dashboard</a></li>
+                            <li class="active">E-learn(tutorial) Management</li>
+                            <li class="active">Add Video</li>
+                        </ol>
+                        <hr>
+                       </div>
+                    </div>
+                    <!-- /.row -->
+                  
+
+
+                 <div class="row">
+                     <div class="col-sm-12">
+                          {% include 'includes/_messages.html' %}
+                         <div class="panel panel-default center-block" style="border-radius: 0.5px">
+         <div class="panel-heading bg-white"> 
+            <h3 class="text-center">Add Video</h3> 
+         </div>
+
+        <div class="panel-body"> 
+           <form method="post"  action="/admin/e-learn-mng/add-video"
+                                  enctype=multipart/form-data>
+
+                  <div class="form-group inline">
+           
+         <ul class="list list-unstyled upload-i_v_wrapper" style="display: inline-flex;">
+           <li>
+             <input class="file-upload-input" type='file' onchange="readURL(this);" accept="image/*" hidden="hidden" style="display: none;" name="e_tmb" required="" />
+             <img class=" file-upload-image img-responsive   all-border " src="#" alt="your image" /><br>
+             <button type="button" class="btn btn-block btn-lg all-border upload_btn glyphicon glyphicon-plus text-center" onchange="readURL(this);"></button>
+           </li>
+           <li>  
+            <br>
+            <button type="button" onclick="removeUpload()" class="btn btn-danger btn-sm remove-image  all-border">Remove <span class="image-title">Uploaded Image</span></button><br><br>
+            <span class="text-center image-title-no">Select Thumbnail of Video.</span>
+            </li>
+         </ul>
+          
+
+           </div>
+
+              <div class="form-group inline">
+           
+         <ul class="list list-unstyled upload-i_v_wrapper1" style="display: inline-flex;">
+           <li>
+             <input class="file-upload-input1" type='file' onchange="readURL1(this);"  hidden="hidden" style="display: none;" name="e_vid" required="" accept="video/*" />
+            <video   id="vid_1" src="" data-ckin="default" data-overlay="1" data-title="Krushi-mahiti." class="all-border" controls="" >
+         </video>
+             <button type="button" class="btn btn-block btn-lg all-border upload_btn1 glyphicon glyphicon-plus text-center" onchange="readURL1(this);"></button>
+           </li>
+           <li>  
+            <br>
+            <button type="button" onclick="removeUpload1()" class="btn btn-danger btn-sm remove-image1  all-border">Remove <span class="image-title1">Uploaded Image</span></button><br><br>
+            <span class="text-center image-title-no1">Select Video.</span>
+            </li>
+         </ul>
+          
+
+           </div>
+          
+
+
+              <div class="form-group">
+            <label for="Topic_Name" class="col-form-label ">Topic Name</label>
+            <input type="text" class="form-control all-border" id="Topic_Name" placeholder="" name="e_learn_name">
+          </div>
+
+            <div class="form-group">
+                <label for="Description" class="col-form-label">Description</label>
+                      <textarea class="form-control" id="Description" rows="3" name="e_learn_description"></textarea>
+            </div>
+
+          <button type="submit" class="btn btn-primary btn-block">Add</button>
+
+          </form>
+
+        </div> 
+        </div>
+                     </div>
+                 </div>
+                   
+
+
+                </div>
+                <!-- /.container-fluid -->
+            </div>
+            <!-- /#page-wrapper -->
+
+      
+
+<script>
+
+
+$(document).ready(function(){
+
+    $('.upload_btn').click(function(){
+        $('.file-upload-input').click();
+    });
+
+     $('.upload_btn1').click(function(){
+        $('.file-upload-input1').click();
+    });
+
+   
+});
+
+ function readURL(input)
+    {
+               if (input.files && input.files[0]) {
+
+            var reader = new FileReader();
+
+          reader.onload = function(e) {
+            $('.upload_btn').hide();
+             $('.image-title-no').hide();
+            $('.file-upload-image').attr('src', e.target.result);
+            $('.file-upload-image').show();
+            $('.remove-image').show();
+           
+            $('.image-title').html(input.files[0].name);
+          };
+
+          reader.readAsDataURL(input.files[0]);
+
+        } else {
+          removeUpload();
+        }
+    }
+
+    function removeUpload()
+    {
+         $('.file-upload-input').replaceWith($('.file-upload-input').clone());
+
+        $('.file-upload-image').hide();
+         $('.file-upload-image').attr('src','');
+        $('.remove-image').hide();
+        $('.upload_btn').show();
+         $('.image-title-no').show();
+    } 
+
+     function readURL1(input)
+    {
+               if (input.files && input.files[0]) {
+
+            var reader = new FileReader();
+
+          reader.onload = function(e) {
+            $('.upload_btn1').hide();
+             $('.image-title-no1').hide();
+             $('#vid_1').attr('poster',$('.file-upload-image').attr('src'));
+            $('#vid_1').attr('src', e.target.result);
+            $('#vid_1').show();
+            $('.remove-image1').show();
+           
+            $('.image-title1').html(input.files[0].name);
+          };
+
+          reader.readAsDataURL(input.files[0]);
+
+        } else {
+          removeUpload1();
+        }
+    }
+
+    function removeUpload1()
+    {
+         $('.file-upload-input1').replaceWith($('.file-upload-input1').clone());
+
+        $('#vid_1').hide();
+        $('#vid_1').attr('src','');
+        $('.remove-image1').hide();
+        $('.upload_btn1').show();
+         $('.image-title-no1').show();
+    } 
+    </script>
+
+{% endblock %}

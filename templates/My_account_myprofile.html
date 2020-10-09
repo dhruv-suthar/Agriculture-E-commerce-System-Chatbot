@@ -1,0 +1,162 @@
+{% extends 'layout.html' %}
+
+
+{% block body %}
+
+ 
+
+
+<section class="my_account" style="padding-top: 100px;">
+  
+
+    <div class="container">
+      <div class="row">
+        
+        <div class="col-md-3 col-sm-3 col-xl-3" >
+          <div class="panel panel-success all-border bg ">
+            <div class="panel-body">
+               <div class="profile_container">
+                  
+                  <div class="row">
+                    <div class="col-md-5 col-sm-5 col-xl-5">
+                      {% if get_user_data.user_profile != 'Farmer.jpg' %}
+                      <img src="static/img/SERVER_FILES/users/{{ get_user_data.user_profile }}" class="img-rounded Farmer-login-icon" name="user_img">
+                      {% else %}
+                        <img src="static/img/icons/{{ get_user_data.user_profile }}" class="img-rounded Farmer-login-icon" name="user_img">
+                      {% endif %}
+                      
+                    </div>
+                    <div class="col-md-7 col-sm-7 col-xl-7">
+                      <p>Hello</p>
+                      <h4 name="user_name">{{ get_user_data.user_full_name }}</h4>
+                    </div>
+                  </div>
+               </div>
+            </div>
+           
+          </div>
+
+         
+              <div class="list-group my_account_links all-border">
+                <a href="/user-profile" class="list-group-item active ">My Profile</a>
+                <a href="/user-orders" class="list-group-item all-border">Orders</a>
+                <a href="/user-wishlists" class="list-group-item">Wishlists</a>
+                <a href="/logout" class="list-group-item all-border">Logout</a>
+              </div>
+        
+        
+        </div>
+
+        <div class="col-md-9 col-sm-9 col-xl-9">
+              {% include 'includes/_messages.html' %}
+          <div class="panel panel-success all-border bg ">
+            <div class="panel-body">
+             <h3>My Profile</h3>
+             <hr>
+             
+       <form action=""  method="POST">
+     <!-- <div class="form-group">
+              <label for="User-type" class="col-form-label ">User Type</label>
+                <select class="form-control all-border" placeholder="user">
+                <option value="47">Farmer</option>
+                <option value="46">Agriculture Scientist</option>
+              </select>
+            </div>-->
+        
+                <label>User Type: </label>&nbsp;&nbsp;&nbsp;{{ get_user_data.user_type }}
+              
+
+              <div class="form-group">
+            <label for="User-Name" class="col-form-label ">Your Name <sup><color style="color:red;">*</color></sup></label>
+            <input type="text" class="form-control all-border" id="User-Name" placeholder="Manubhai" name="user_name" value="{{ get_user_data.user_full_name }}" required="">
+          </div>
+
+           <div class="form-group">
+            <label for="Mobile-No" class="col-form-label ">Mobile No<sup><color style="color:red;">*</color></sup></label>
+            <input type="text" class="form-control all-border" id="User-Name" placeholder="" name="user_mobile_no" value="{{ get_user_data.user_mobile_no }}" disabled="">
+          </div>
+
+         
+         
+
+            <div class="form-group">
+              <label for="State" class="col-form-label " name="city" >City<sup><color style="color:red;">*</color></sup></label>
+                <select class="form-control all-border" placeholder="user" name="user_city">
+                  {% for get_city_data in get_city_data %}
+                  {% if get_user_data.user_city_id == get_city_data.city_id %}
+                <option value="{{ get_city_data.city_id }}" selected="">{{ get_city_data.city_name }}</option>
+                  {% else %}
+                   <option value="{{ get_city_data.city_id }}" >{{ get_city_data.city_name }}</option>
+                  {% endif %}
+                  {% endfor %}
+                  
+            
+              </select>
+            </div>
+
+
+       <div class="form-group">
+              <label for="State" class="col-form-label ">State<sup><color style="color:red;">*</color></sup></label>
+                <select class="form-control all-border" placeholder="user" name="state">
+                  {% for get_city_data in get_city_data %}
+                  {% if get_user_data.city.state_id == get_city_data.state_id %}
+                <option value="{{ get_city_data.state_id }}" selected="">{{ get_city_data.state.state_name }}</option>
+                {% else %}
+                   <option value="{{ get_city_data.state_id }}" >{{ get_city_data.state.state_name }}</option>
+                  {% endif %}
+
+                  {% endfor %}
+              </select>
+            </div>
+
+
+            <div class="form-group">
+              <label for="Address" class="col-form-label">Address<sup><color style="color:red;">*</color></sup></label>
+                  <textarea class="form-control" id="Address" rows="3" name="user_address" required="">{{ get_user_data.user_address }}</textarea>
+            </div>
+
+
+             <!--<div class="form-group">
+            <label for="User-password" class="col-form-label ">Password</label>
+            <input type="password" class="form-control all-border" id="User-password" placeholder="●●●●●●●●">
+          </div>-->
+           <hr>
+          <div class="row form-group">
+              &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;<label class="text-center">Change Password</label>
+           </div>
+            <div class="form-group col-md-6">
+
+              <label>Old Password</label>
+              <input type="password" name="old_password" class="form-control all-border">
+            </div>
+            <div class="form-group col-md-6">
+                 <label>New Password</label>
+              <input type="password" name="new_password" class="form-control all-border">
+            </div>
+          </div>
+          
+
+          <button type="submit" class="btn btn-success btn-block" id="Update">Update</button>
+
+          </form>
+
+    
+            </div>
+           
+          </div>
+
+         
+             
+        
+        
+        </div>
+
+
+     </div>   
+
+    </div>
+</section>
+
+{% endblock %}
+
+	

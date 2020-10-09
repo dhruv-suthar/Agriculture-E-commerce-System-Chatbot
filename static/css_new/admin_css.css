@@ -1,0 +1,132 @@
+.crop-description-scroll::-webkit-scrollbar { 
+                display: none; 
+            } 
+        .upload-i_v_wrapper
+        {
+            padding-top: 5px;
+
+        }
+        .upload-i_v_wrapper .upload_btn
+        {
+           
+            
+            padding: 50px 100px;
+            background: white;
+            border:2px solid #d3d3d3;
+            border-radius: 1px;
+
+        }
+      
+
+        .upload-i_v_wrapper .file-upload-image
+        {
+            display: none;
+            width: 80%;
+            height: 80%;
+            border:1px solid #d3d3d3;
+            border-radius: 1px;
+
+        }
+
+        .upload-i_v_wrapper .remove-image
+        {
+            display: none;
+            width: 100%;
+          
+            
+        }
+        .upload-i_v_wrapper  > li
+        {
+            padding: 0px 5px 0px 5px;
+        }
+
+        .upload-i_v_wrapper  > li:nth-child(2) > span 
+        {
+            vertical-align: middle;
+        }
+
+        @media (max-width: 768px)
+        {
+            .upload-i_v_wrapper .upload_btn
+            {
+              
+                background: white;
+                
+            }
+
+        }
+          .upload-i_v_wrapper1
+        {
+            padding-top: 5px;
+
+        }
+        .upload-i_v_wrapper1 .upload_btn1
+        {
+           
+            
+            padding: 50px 100px;
+            background: white;
+            border:2px solid #d3d3d3;
+            border-radius: 1px;
+
+        }
+      
+
+        .upload-i_v_wrapper1 #vid_1
+        {
+            display: none;
+            width: 100%;
+            height: 100%;
+            border:1px solid #d3d3d3;
+            border-radius: 1px;
+
+        }
+      
+        .upload-i_v_wrapper1 .remove-image1
+        {
+            display: none;
+            width: 100%;
+          
+            
+        }
+        .upload-i_v_wrapper1  > li
+        {
+            padding: 0px 5px 0px 5px;
+        }
+
+        .upload-i_v_wrapper1  > li:nth-child(2) > span 
+        {
+            vertical-align: middle;
+        }
+
+        @media (max-width: 768px)
+        {
+            .upload-i_v_wrapper1 .upload_btn1
+            {
+              
+                background: white;
+                
+            }
+
+        }
+        .thumbnail >   .glyphicon-play-circle 
+        {
+                
+                
+            position: absolute;
+            top: 30%;
+            right:40%;
+        }
+        ::-webkit-scrollbar
+        {
+            width: 2px;
+        }
+        #dataTables-example_filter
+        {
+            padding-left: 250px;
+        }
+         #dataTables-example_paginate
+        {
+           margin-top: -20px;
+           padding-left: 250px;
+        }

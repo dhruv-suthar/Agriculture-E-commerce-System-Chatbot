@@ -1,0 +1,675 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content="">
+        <meta name="author" content="">
+
+        <title>Agrostar -  Admin</title>
+
+        <!-- Bootstrap Core CSS -->
+        <link href="../css/bootstrap.min.css" rel="stylesheet">
+
+        <!-- MetisMenu CSS -->
+        <link href="../css/metisMenu.min.css" rel="stylesheet">
+
+        <!-- Timeline CSS -->
+        <link href="../css/timeline.css" rel="stylesheet">
+
+        <!-- Custom CSS -->
+        <link href="../css/startmin.css" rel="stylesheet">
+
+        <!-- Morris Charts CSS -->
+        <link href="../css/morris.css" rel="stylesheet">
+
+        <!-- Custom Fonts -->
+        <link href="../css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+        <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+        <!--[if lt IE 9]>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.min.js"></script>
+        <![endif]-->
+
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.7.5/css/bootstrap-select.min.css">
+        <!--for profile image of user-->
+       
+        
+        <style type="text/css">
+        .upload-i_v_wrapper
+        {
+            padding-top: 5px;
+
+        }
+        .upload-i_v_wrapper .upload_btn
+        {
+           
+            
+            padding: 50px 100px;
+            background: white;
+            border:2px solid #d3d3d3;
+            border-radius: 1px;
+
+        }
+      
+
+        .upload-i_v_wrapper .file-upload-image
+        {
+            display: none;
+            width: 80%;
+            height: 80%;
+            border:1px solid #d3d3d3;
+            border-radius: 1px;
+
+        }
+
+        .upload-i_v_wrapper .remove-image
+        {
+            display: none;
+            width: 100%;
+          
+            
+        }
+        .upload-i_v_wrapper  > li
+        {
+            padding: 0px 5px 0px 5px;
+        }
+
+        .upload-i_v_wrapper  > li:nth-child(2) > span 
+        {
+            vertical-align: middle;
+        }
+
+        @media (max-width: 768px)
+        {
+            .upload-i_v_wrapper .upload_btn
+            {
+              
+                background: white;
+                
+            }
+
+        }
+        </style>
+    </head>
+    <body>
+
+        <div id="wrapper">
+
+            <!-- Navigation -->
+            <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation" style="position: fixed;">
+                <div class="navbar-header">
+                    <a class="navbar-brand" href="index.html"><img src="../img/logo-white-200x53.png" class="img-responsive" style="width: 100px;"></a>
+                </div>
+
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+
+                <!--<ul class="nav navbar-nav navbar-left navbar-top-links">
+                    <li><a href="#"><i class="fa fa-home fa-fw"></i> Website</a></li>
+                </ul>-->
+
+                <ul class="nav navbar-right navbar-top-links">
+                    <li class="dropdown navbar-inverse">
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                            <i class="fa fa-bell fa-fw"></i> <b class="caret"></b>
+                        </a>
+                        <ul class="dropdown-menu dropdown-alerts">
+                            <li>
+                                <a href="#">
+                                    <div>
+                                        <i class="fa fa-comment fa-fw"></i> New Comment
+                                        <span class="pull-right text-muted small">4 minutes ago</span>
+                                    </div>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <div>
+                                        <i class="fa fa-twitter fa-fw"></i> 3 New Followers
+                                        <span class="pull-right text-muted small">12 minutes ago</span>
+                                    </div>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <div>
+                                        <i class="fa fa-envelope fa-fw"></i> Message Sent
+                                        <span class="pull-right text-muted small">4 minutes ago</span>
+                                    </div>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <div>
+                                        <i class="fa fa-tasks fa-fw"></i> New Task
+                                        <span class="pull-right text-muted small">4 minutes ago</span>
+                                    </div>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <div>
+                                        <i class="fa fa-upload fa-fw"></i> Server Rebooted
+                                        <span class="pull-right text-muted small">4 minutes ago</span>
+                                    </div>
+                                </a>
+                            </li>
+                            <li class="divider"></li>
+                            <li>
+                                <a class="text-center" href="#">
+                                    <strong>See All Alerts</strong>
+                                    <i class="fa fa-angle-right"></i>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                            <i class="fa fa-user fa-fw"></i> secondtruth <b class="caret"></b>
+                        </a>
+                        <ul class="dropdown-menu dropdown-user">
+                            <li><a href="#"><i class="fa fa-user fa-fw"></i> User Profile</a>
+                            </li>
+                            <li><a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a>
+                            </li>
+                            <li class="divider"></li>
+                            <li><a href="login.html"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+                <!-- /.navbar-top-links -->
+
+                <div class="navbar-default sidebar" role="navigation">
+                    <div class="sidebar-nav navbar-collapse">
+                        <ul class="nav" id="side-menu">
+                            <!--<li class="sidebar-search">
+                                <div class="input-group custom-search-form">
+                                    <input type="text" class="form-control" placeholder="Search...">
+                                    <span class="input-group-btn">
+                                        <button class="btn btn-primary" type="button">
+                                            <i class="fa fa-search"></i>
+                                        </button>
+                                </span>
+                                </div>
+                              
+                            </li>-->
+                            <li>
+                                <a href="index.html" ><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
+                            </li>
+                            <li>
+                                <a href=""><i class="glyphicon glyphicon-user text-primary"></i>&nbsp; User Management<span class="fa arrow"></span></a>
+                                <ul class="nav nav-second-level">
+                                    <li>
+                                        <a href="User_user_mng.html">View / Delete Users</a>
+                                    </li>
+                                    <li>
+                                        <a href="User_user_add.html" >Add User</a>
+                                    </li>
+                                </ul>
+                                <!-- /.nav-second-level -->
+                            </li>
+                          
+
+                             <li>
+                                <a href="#"><i class="fa fa-shopping-bag text-primary"></i>&nbsp; Product Management<span class="fa arrow"></span></a>
+                                <ul class="nav nav-second-level">
+                                    <li>
+                                        <a href="Product_product_mng.html" class="active">View / Update / Delete Product</a>
+                                    </li>
+                                    <li>
+                                        <a href="Product_product_add.html">Add Product</a>
+                                    </li>
+                                </ul>
+                                <!-- /.nav-second-level -->
+                            </li>
+
+
+                            <li>
+                                <a href="Order_Management.html"><i class="fa fa-shopping-cart text-primary">&nbsp;</i> Order Management</a>
+                            </li>
+                             <li>
+                                <a href="Review_Management.html"><i class="fa fa-edit text-primary">&nbsp;</i> Review Management</a>
+                            </li>
+
+                             <li>
+                                <a href="#"><i class="fa fa-envira text-primary"></i>&nbsp; Crop Management<span class="fa arrow"></span></a>
+                                <ul class="nav nav-second-level">
+                                    <li>
+                                        <a href="Crop_crop_mng.html">View / Update / Delete Crops</a>
+                                    </li>
+                                    <li>
+                                        <a href="Crop_crop_add.html">Add Crop</a>
+                                    </li>
+                                </ul>
+                                <!-- /.nav-second-level -->
+                            </li>
+
+
+                              <li>
+                                <a href="#"><i class="fa fa-youtube-play text-primary"></i>&nbsp; E-learn(tutorial) Management<span class="fa arrow"></span></a>
+                                <ul class="nav nav-second-level">
+                                    <li>
+                                        <a href="E-learn_e-learn_mng.html">View / Delete Videos</a>
+                                    </li>
+                                    <li>
+                                        <a href="E-learn_e-learn_add.html">Add Video</a>
+                                    </li>
+                                </ul>
+                                <!-- /.nav-second-level -->
+                            </li>
+
+                              <li>
+                                <a href="Feedback_Management.html"><i class="fa fa-paper-plane-o text-primary">&nbsp;</i> Feedback Management</a>
+                            </li>
+
+                             <li>
+                                <a href="Contact_Us.html"><i class="fa fa-reply text-primary">&nbsp;</i> Contact Us Management</a>
+                            </li>
+
+                          
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+
+            <div id="page-wrapper">
+                <div class="container-fluid">
+                    <div class="row">
+                       <div class="col-lg-12">
+                           <ol class="breadcrumb " style="margin-top: 30px;font-size: 15px;background-color: none;">
+                            <li><a href="#">Dashboard</a></li>
+                            <li class="active">Product Management</li>
+                            <li class="active">View / Update / Delete Products</li>
+                        </ol>
+                        <hr>
+                       </div>
+                    </div>
+                    <!-- /.row -->
+
+                    <div class="row">
+                        <div class="col-sm-1"></div>
+                        <div class="col-sm-10 center-block">
+                            <div class="panel panel-default">
+                                <div class="panel-heading">Update Product</div>
+                            
+                            <div class="panel-body">
+                                 <form>
+                                      <div class="form-group inline">    
+                                         <ul class="list list-unstyled upload-i_v_wrapper" style="display: inline-flex;">
+                                           <li>
+                                             <input class="file-upload-input" type='file' onchange="readURL(this);" accept="image/*" hidden="hidden" style="display: none;" />
+                                             <img class="img-circle file-upload-image img-responsive   all-border " src="#" alt="your image" /><br>
+                                             <button type="button" class="btn btn-block btn-lg all-border upload_btn glyphicon glyphicon-plus text-center" onchange="readURL(this);"></button>
+                                           </li>
+                                           <li>  
+                                            <br>
+                                            <button type="button" onclick="removeUpload()" class="btn btn-danger btn-sm remove-image  all-border">Remove <span class="image-title">Uploaded Image</span></button><br><br><br><br><br>
+                                            <span class="text-center image-title-no">Upload Image.</span>
+                                            </li>
+                                         </ul>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-sm-6">
+
+                                                <div class="form-group">
+                                                    <label for="Product_Category" class="col-form-label ">Product Category</label>
+                                                    <select class="form-control all-border" placeholder="user">
+                                                        <option value="+47">Seed</option>
+                                                        <option value="+46">Farm Machinery</option>
+                                                    </select>
+                                                </div>
+
+                                                <div class="form-group">
+                                                      <label for="Product_Name" class="col-form-label ">Product Name</label>
+                                                    <input type="text" class="form-control all-border" id="Product_Name" placeholder="Talpatri">
+                                                </div>
+
+                                                <div class="form-group">
+                                                      <label for="Product_Quantity" class="col-form-label ">Product Quanity</label>
+                                                    <input type="number" class="form-control all-border" id="Product_Quantity" placeholder="">
+                                                </div>
+
+                                                  <div class="form-group">
+                                                      <label for="Product_Price" class="col-form-label ">Product Price</label>
+                                                    <input type="number" class="form-control all-border" id="Product_Price" placeholder="">
+                                                </div>
+
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <div class="form-group">
+                                                      <label for="Product_Description" class="col-form-label ">Product Description</label>
+                                                      <textarea class="form-control" rows="4" id="Product_Description"></textarea>
+                                                </div>
+
+                                              <div class="form-group">
+                                                  <label for="Relatd_Crop" class="col-form-label ">Related Crop</label>
+                                                <select id="Relatd_Crop" data-style="" class="selectpicker form-control" multiple data-max-options="2">
+                                                    <option>Crop A</option>
+                                                    <option>Crop B</option>
+                                                </select>   
+                                              </div>
+
+                                                <div class="form-group">
+                                                     <label for="Brand" class="col-form-label ">Brand</label>
+                                                    <select class="form-control all-border" placeholder="">
+                                                        <option value="+47">Brand A</option>
+                                                        <option value="+46">Brand B</option>
+                                                    </select>
+                                                </div>
+
+                                                  <button type="submit" class="btn btn-primary btn-block">Update</button>
+                                            </div>
+                                        </div>
+                                        
+                                 </form>
+                                 </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-1"></div>
+                    </div>
+                  
+
+                    <div class="row">
+                        <div class="col-sm-12">
+                             <div class="panel panel-default">
+                            <div class="panel-heading">
+                                Product Table
+                            </div>
+                            <div class="panel-body">
+
+
+                                <div class="row">
+                                    <div class="col-sm-6 ">
+                                        <div class="dataTables_length" id="dataTables-example_length">
+                                            <label>Show <select name="dataTables-example_length" aria-controls="dataTables-example" class="form-control input-sm"><option value="10">10</option><option value="25">25</option><option value="50">50</option><option value="100">100</option></select> entries</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6 ">
+                                        <div id="dataTables-example_filter" class="dataTables_filter pull-right">
+                                            <label>Search:<input type="search" class="form-control input-sm" placeholder="" aria-controls="dataTables-example"></label>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                                <div class="table-responsive">
+                                    <div id="dataTables-example_wrapper" class="dataTables_wrapper form-inline dt-bootstrap no-footer">
+                                            <div class="row">
+                                                <div class="col-sm-12">
+                                                    <table class="table table-striped table-bordered table-hover dataTable no-footer" id="dataTables-example" role="grid" aria-describedby="dataTables-example_info">
+                                            <thead>
+                                                <tr role="row">
+                                                    <th class="sorting_asc" tabindex="0" aria-controls="dataTables-example" rowspan="1" colspan="1" aria-sort="ascending" aria-label="User Type: activate to sort column descending" style="width: 104px;">Product id</th>
+                                                    <th class="sorting" tabindex="0" aria-controls="dataTables-example" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending" style="width: 309px;">Product Category</th>
+                                                    <th class="sorting" tabindex="0" aria-controls="dataTables-example" rowspan="1" colspan="1" aria-label="Mobile No: activate to sort column ascending" style="width: 250px;">Product Name</th>
+                                                    <th class="sorting" tabindex="0" aria-controls="dataTables-example" rowspan="1" colspan="1" aria-label="Address: activate to sort column ascending" style="width: 102px;">Product Quanity</th>
+                                                    <th class="sorting" tabindex="0" aria-controls="dataTables-example" rowspan="1" colspan="1" aria-label="Active: activate to sort column ascending" style="width: 103px;">Product Price()</th>
+                                                    <th class="sorting" tabindex="0" aria-controls="dataTables-example" rowspan="1" colspan="1" aria-label="Delete: activate to sort column ascending" style="width: 305px;">Product Description</th>
+                                                    <th class="sorting" tabindex="0" aria-controls="dataTables-example" rowspan="1" colspan="1" aria-label="Delete: activate to sort column ascending" style="width: 109px;">Related Crop</th>
+                                                    <th class="sorting" tabindex="0" aria-controls="dataTables-example" rowspan="1" colspan="1" aria-label="Delete: activate to sort column ascending" style="width: 109px;">Brand</th>
+                                                    <th class="sorting" tabindex="0" aria-controls="dataTables-example" rowspan="1" colspan="1" aria-label="Delete: activate to sort column ascending" style="width: 103px;">Update</th>
+                                                    <th class="sorting" tabindex="0" aria-controls="dataTables-example" rowspan="1" colspan="1" aria-label="Delete: activate to sort column ascending" style="width: 103px;">Delete</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                      
+                                            <tr class="gradeA odd" role="row">
+                                                    <td class="sorting_1">P01</td>
+                                                    <td>Seed</td>
+                                                    <td>Product A</td>
+                                                    <td>10</td>
+                                                    <td>1500</td>
+                                                    <td>This is a product related to this crops</td>
+                                                    <td>Wheat</td>
+                                                    <td>Brand</td>
+                                                    <td class="center"><a href="#" class="btn btn-success " role="button"> Update </a></td>
+                                                    <td class="center"><a href="#" class="btn btn-danger " role="button"> Delete </a></td>
+                                                </tr>
+                                                <tr class="gradeA even" role="row">
+                                                    <td class="sorting_1">P02</td>
+                                                    <td>Seed</td>
+                                                    <td>Product A</td>
+                                                    <td>10</td>
+                                                    <td>1500</td>
+                                                    <td>This is a product related to this crops</td>
+                                                    <td>Wheat</td>
+                                                    <td>Brand</td>
+                                                    <td class="center"><a href="#" class="btn btn-success " role="button"> Update </a></td>
+                                                    <td class="center"><a href="#" class="btn btn-danger " role="button"> Delete </a></td>
+                                                </tr>
+
+
+                                                <tr class="gradeA odd" role="row">
+                                                     <td class="sorting_1">P03</td>
+                                                    <td>Seed</td>
+                                                    <td>Product A</td>
+                                                    <td>10</td>
+                                                    <td>1500</td>
+                                                    <td>This is a product related to this crops</td>
+                                                    <td>Wheat</td>
+                                                    <td>Brand</td>
+                                                    <td class="center"><a href="#" class="btn btn-success " role="button"> Update </a></td>
+                                                    <td class="center"><a href="#" class="btn btn-danger " role="button"> Delete </a></td>
+                                                </tr>
+                                                <tr class="gradeA even" role="row">
+                                                    <td class="sorting_1">P04</td>
+                                                    <td>Seed</td>
+                                                    <td>Product A</td>
+                                                    <td>10</td>
+                                                    <td>1500</td>
+                                                    <td>This is a product related to this crops</td>
+                                                    <td>Wheat</td>
+                                                    <td>Brand</td>
+                                                    <td class="center"><a href="#" class="btn btn-success " role="button"> Update </a></td>
+                                                    <td class="center"><a href="#" class="btn btn-danger " role="button"> Delete </a></td>
+                                                </tr>
+
+                                                <tr class="gradeA odd" role="row">
+                                                      <td class="sorting_1">P05</td>
+                                                    <td>Seed</td>
+                                                    <td>Product A</td>
+                                                    <td>10</td>
+                                                    <td>1500</td>
+                                                    <td>This is a product related to this crops</td>
+                                                    <td>Wheat</td>
+                                                    <td>Brand</td>
+                                                    <td class="center"><a href="#" class="btn btn-success " role="button"> Update </a></td>
+                                                    <td class="center"><a href="#" class="btn btn-danger " role="button"> Delete </a></td>
+                                                </tr>
+                                                <tr class="gradeA even" role="row">
+                                                    <td class="sorting_1">P06</td>
+                                                    <td>Seed</td>
+                                                    <td>Product A</td>
+                                                    <td>10</td>
+                                                    <td>1500</td>
+                                                    <td>This is a product related to this crops</td>
+                                                    <td>Wheat</td>
+                                                    <td>Brand</td>
+                                                    <td class="center"><a href="#" class="btn btn-success " role="button"> Update </a></td>
+                                                    <td class="center"><a href="#" class="btn btn-danger " role="button"> Delete </a></td>
+                                                </tr>
+
+                                                <tr class="gradeA odd" role="row">
+                                                    <td class="sorting_1">P07</td>
+                                                    <td>Seed</td>
+                                                    <td>Product A</td>
+                                                    <td>10</td>
+                                                    <td>1500</td>
+                                                    <td>This is a product related to this crops</td>
+                                                    <td>Wheat</td>
+                                                    <td>Brand</td>
+                                                    <td class="center"><a href="#" class="btn btn-success " role="button"> Update </a></td>
+                                                    <td class="center"><a href="#" class="btn btn-danger " role="button"> Delete </a></td>
+                                                </tr>
+                                                <tr class="gradeA even" role="row">
+                                                    <td class="sorting_1">P08</td>
+                                                    <td>Seed</td>
+                                                    <td>Product A</td>
+                                                    <td>10</td>
+                                                    <td>1500</td>
+                                                    <td>This is a product related to this crops</td>
+                                                    <td>Wheat</td>
+                                                    <td>Brand</td>
+                                                    <td class="center"><a href="#" class="btn btn-success " role="button"> Update </a></td>
+                                                    <td class="center"><a href="#" class="btn btn-danger " role="button"> Delete </a></td>
+                                                </tr>
+
+                                                <tr class="gradeA odd" role="row">
+                                                     <td class="sorting_1">P09</td>
+                                                    <td>Seed</td>
+                                                    <td>Product A</td>
+                                                    <td>10</td>
+                                                    <td>1500</td>
+                                                    <td>This is a product related to this crops</td>
+                                                    <td>Wheat</td>
+                                                    <td>Brand</td>
+                                                    <td class="center"><a href="#" class="btn btn-success " role="button"> Update </a></td>
+                                                    <td class="center"><a href="#" class="btn btn-danger " role="button"> Delete </a></td>
+                                                </tr>
+                                                <tr class="gradeA even" role="row">
+                                                    <td class="sorting_1">P10</td>
+                                                    <td>Seed</td>
+                                                    <td>Product A</td>
+                                                    <td>10</td>
+                                                    <td>1500</td>
+                                                    <td>This is a product related to this crops</td>
+                                                    <td>Wheat</td>
+                                                    <td>Brand</td>
+                                                    <td class="center"><a href="#" class="btn btn-success " role="button"> Update </a></td>
+                                                    <td class="center"><a href="#" class="btn btn-danger " role="button"> Delete </a></td>
+                                                </tr>
+                                            </tbody>
+                                        </table></div></div>
+                                    </div>
+                                </div>
+
+
+
+                                <div class="row">
+                                    <div class="col-sm-5">
+                                        <br>
+                                        <div class="dataTables_info" id="dataTables-example_info" role="status" aria-live="polite">Showing 1 to 10 of 57 entries</div>
+                                    </div>
+
+                                    <div class="col-sm-7">
+                                        <div class="dataTables_paginate paging_simple_numbers" id="dataTables-example_paginate ">
+                                            <ul class="pagination pull-right">
+                                                <li class="paginate_button previous disabled" id="dataTables-example_previous"><a href="#" aria-controls="dataTables-example" data-dt-idx="0" tabindex="0">Previous</a></li>
+                                                <li class="paginate_button active"><a href="#" aria-controls="dataTables-example" data-dt-idx="1" tabindex="0">1</a></li>
+                                                <li class="paginate_button "><a href="#" aria-controls="dataTables-example" data-dt-idx="2" tabindex="0">2</a></li>
+                                                <li class="paginate_button "><a href="#" aria-controls="dataTables-example" data-dt-idx="3" tabindex="0">3</a></li>
+                                                <li class="paginate_button "><a href="#" aria-controls="dataTables-example" data-dt-idx="4" tabindex="0">4</a></li>
+                                                <li class="paginate_button "><a href="#" aria-controls="dataTables-example" data-dt-idx="5" tabindex="0">5</a></li>
+                                                <li class="paginate_button "><a href="#" aria-controls="dataTables-example" data-dt-idx="6" tabindex="0">6</a></li>
+                                                <li class="paginate_button next" id="dataTables-example_next"><a href="#" aria-controls="dataTables-example" data-dt-idx="7" tabindex="0">Next</a></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                            </div>
+                        </div>
+                        </div>
+                    </div>
+
+            
+                   
+
+
+                </div>
+                <!-- /.container-fluid -->
+            </div>
+            <!-- /#page-wrapper -->
+
+        </div>
+        <!-- /#wrapper -->
+
+        <!-- jQuery -->
+        <script src="../js/jquery.min.js"></script>
+
+
+
+
+        <!-- Bootstrap Core JavaScript -->
+        <script src="../js/bootstrap.min.js"></script>
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.7.5/js/bootstrap-select.min.js"></script>
+
+        <!-- Metis Menu Plugin JavaScript -->
+        <script src="../js/metisMenu.min.js"></script>
+
+        <!--Morris Charts JavaScript -->
+        <!--<script src="../js/raphael.min.js"></script>
+        <script src="../js/morris.min.js"></script>
+        <script src="../js/morris-data.js"></script>-->
+
+         <!-- DataTables JavaScript -->
+        <script src="../js/dataTables/jquery.dataTables.min.js"></script>
+        <script src="../js/dataTables/dataTables.bootstrap.min.js"></script>
+
+
+        <!-- Custom Theme JavaScript -->
+        <script src="../js/startmin.js"></script>
+        
+
+        <script>
+
+
+$(document).ready(function(){
+
+    $('.upload_btn').click(function(){
+        $('.file-upload-input').click();
+    });
+
+   
+});
+
+ function readURL(input)
+    {
+               if (input.files && input.files[0]) {
+
+            var reader = new FileReader();
+
+          reader.onload = function(e) {
+            $('.upload_btn').hide();
+             $('.image-title-no').hide();
+            $('.file-upload-image').attr('src', e.target.result);
+            $('.file-upload-image').show();
+            $('.remove-image').show();
+           
+            $('.image-title').html(input.files[0].name);
+          };
+
+          reader.readAsDataURL(input.files[0]);
+
+        } else {
+          removeUpload();
+        }
+    }
+
+    function removeUpload()
+    {
+         $('.file-upload-input').replaceWith($('.file-upload-input').clone());
+
+        $('.file-upload-image').hide();
+        $('.remove-image').hide();
+        $('.upload_btn').show();
+         $('.image-title-no').show();
+    } 
+    </script>
+        
+
+
+    </body>
+</html>

@@ -1,0 +1,80 @@
+
+{% extends 'layout.html' %}
+
+{% block body %}
+<br>
+<br>
+<br>
+<br>
+
+  <div class="container">
+    <section class="thumbnail_i_V">
+      {% for e_learn in e_learns %}
+    <div class="row row2">
+       <div class="col-md-3 col-sm-6 col-xs-6  v_img_tmb">
+         <div class="linear-background  all-border" style="height: 150px;width: 262px;margin:5px;">
+          
+              </div>
+
+          <a href="/E-learn/{{ e_learn.e_learn_id }}" class="thumbnail text-success all-border thumbnail-product" >
+         
+          <img src="/static/img/SERVER_FILES/video-tutorials/{{ e_learn.e_learn_img_tmb }}" alt="" class="img-responsive" style="height: 150px;width: 250px;" name="e_learn_img1"> 
+           <span class="glyphicon glyphicon-play-circle text-center center-block" style="box-shadow: none;text-decoration: none; font-size: 50px;" ></span>
+          </a>
+
+         
+        </div>
+        <div class="col-md-4 col-sm-6 col-xs-6" style="height: 100px;">
+            <div class="linear-product-lb  all-border" style="width: 55px;margin:5px;">
+          
+              </div>
+          <h4 class="e_learn_lb">{{ e_learn.e_learn_name }}</h4>
+          <div class="linear-product-des  all-border" style="margin:5px;">
+          
+              </div>
+          <p class="e_learn_des">{{ e_learn.e_learn_description }}</p>
+        </div>
+    </div>
+      {% endfor %}
+     <ul class="pagination all-border pull-right" name="crop_pagination">
+       <li><a href="#">&laquo;</a></li>
+        <li class="active"><a href="#cl1" class="all-border">1</a></li> 
+        <li class="disabled"><a href="#cl2">2</a></li> 
+        <li><a href="#cl3">3</a></li>
+         <li><a href="#cl4">4</a></li>
+          <li><a href="#cl5">5</a></li> 
+          <li><a href="#">&raquo;</a></li>
+        </ul>
+  
+
+  </section>
+
+</div>
+
+	
+
+
+<script>
+    $(document).ready(function()
+  {
+    $('.largenav li:nth-child(6)').addClass("active");
+     $('.e_learn_lb').hide();
+     $('.e_learn_des').hide();
+      $(window).scroll(function()
+    {
+          if ($(this).scrollTop())
+          {
+                setInterval(function()
+              { 
+            $('.e_learn_lb').fadeIn();
+            $('.e_learn_des').fadeIn();
+          },1000);
+         }
+    });
+  })
+</script>
+{% endblock %}
+
+
+
+

@@ -1,0 +1,82 @@
+{% extends 'layout.html' %}
+
+{% block body %}
+
+<br>
+<br>
+<br>
+<br>
+
+  <div class="container" >
+    <div class="row row1">
+     
+
+     {% if toggle == 1 %}
+      <div class="col-md-2 pull-right">
+      <a href="/Upload-Farming-info" class="btn btn-default  all-border" role="button" style="margin-top: 50px;"> Upload Research-Info </a>
+      </div>
+      {% endif %}
+    </div>
+      <section class="thumbnail_i_V" style="padding-top: 10px;">
+       <div class="row center-block" style="width:75%;box-shadow: none;">
+         <h3 class="linear-background" style="width: 100%;height: 500px;"></h3>
+        {% if research_info.topic_video %}
+           <video   id="vid_1" src="/static/img/SERVER_FILES/farming-info/{{ research_info.topic_video }}" data-ckin="default" data-overlay="1" data-title="{{ research_info.topic_name }}" class="all-border thumbnail-product" name="e_learn_vid1" poster="/static/img/SERVER_FILES/farming-info/{{ research_info.topic_img }}">
+            </video> 
+        {% else %}
+            <div class="thumbnail all-border thumbnail-product">
+           <img src="/static/img/SERVER_FILES/farming-info/{{ research_info.topic_img }}" alt="Generic placeholder thumbnail" class="img-responsive"  name="topic_img" style="width: 100%;">  
+            </div>
+        {% endif %}  
+           
+          
+        </div>
+        <div class="row center-block topic_detail" style="width:75%;box-shadow: none;">
+           <h3 class="linear-product-lb" style=""></h3>
+         <h4 class="topic_name"><span class="text-success ">{{ research_info.topic_name }}</span> By 
+           <h3 class="linear-product-des" style="width: 40px;"></h3>
+          <span  class="text-danger user_name" style="color: rgba(0,0,0,0.3);">
+
+              {% if toggle == 1 and session.s_name == research_info.users.user_full_name %}
+               You
+              {% else %}
+            {{ research_info.users.user_full_name }}
+             {% endif %}
+
+          </span></h4>
+          <h3 class="linear-product-des" style="width: 300px;"></h3>
+          <h3 class="linear-product-des" style="width: 110px;"></h3>
+          <h3 class="linear-product-des" style="width: 80px;"></h3>
+         
+          <p class="topic_description ">{{ research_info.topic_description }}</p>
+         
+        </div>
+    </section>
+
+  
+  </div>
+
+<script>
+    $(document).ready(function()
+  {
+    $('.largenav li:nth-child(5)').addClass("active");
+    $('.topic_name').hide();
+    $('.user_name').hide();
+    $('.topic_description').hide();
+          $(window).scroll(function()
+    {
+          if ($(this).scrollTop())
+          {
+                setInterval(function()
+              { 
+                  $('.topic_name').fadeIn();
+                  $('.user_name').fadeIn();
+                  $('.topic_description').fadeIn();
+          },1000);
+         }
+    });
+  })
+</script>
+  {% endblock %}
+
+	

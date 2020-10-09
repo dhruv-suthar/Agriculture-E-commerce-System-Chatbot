@@ -1,0 +1,239 @@
+{% extends 'layout.html' %}
+
+{% block body %}
+
+<div class="container">
+<div class="row SignUp"> 
+	<div class="col-md-1"></div>
+	<div class="col-md-10  center-block" style="box-shadow: none;">
+	 	<div class="panel panel-success" style="border-radius: 0.5px">
+	 	 <div class="panel-heading bg-white"> 
+     <div class="form-group">
+              <label for="User-type" class="col-form-label ">Language</label>
+                <select class="form-control all-border" placeholder="user">
+                <option value="+47">Gujarati</option>
+                <option value="+46">English</option>
+              </select>
+            </div> 
+	 	 </div>
+
+		<div class="panel-body chatbox" style="overflow-x: hidden;overflow-y: scroll;height: 300px;">
+
+		 
+          
+
+            <div class="chat bot">
+              <p class="chat-message">hi i'am your agridoctor.</p>
+            </div>
+
+       
+
+		</div>
+     <div class="panel-footer">
+       <div class="input-group">
+         <input type="search" class="form-control all-border" placeholder="Type Here" style="z-index: 0;" id="text-input">
+         <span class="input-group-btn">
+          <button class="btn btn-default all-border glyphicon glyphicon-send " type="submit" style="margin-top: -1px;z-index: 0;" id="get_response_btn"></button> 
+        </span>
+        <span class="input-group-btn">
+          <button class="btn btn-default all-border " type="submit" style="margin-top: 0px;z-index: 0;" ><span class="fa fa-microphone" id="add-voice-icon"></span></button> 
+        </span>
+           </div><!-- /input-group -->  
+     </div>
+		</div>
+	 </div> 
+	 <div class="col-md-1"></div>
+   <span id="speech"></span>
+    <span id="interim"></span>
+</div>
+
+	</div>
+
+  <script>
+    $(document).ready(function(){
+     
+       var items_new ;
+        $.getJSON('static/js/barakshare.json', function(data) {
+        items_new = data;
+        
+         
+     });
+         var recognizing  = false;
+        $('.largenav li:nth-child(7)').addClass("active");
+       const synth = window.speechSynthesis;
+       function speech_the_bot(val)
+       {
+        utterThis = new SpeechSynthesisUtterance(val);
+        synth.speak(utterThis);
+      }
+      /* function  translate_in_gujrati_speech(get_gu_data)
+       {
+          var get_translated_text="";
+          var i=0;
+          for(i=0;i<get_gu_data.length;i++)
+          {
+            if(items_new[get_gu_data[i]])
+            {
+               get_translated_text+= items_new[get_gu_data[i]];
+            }
+            else
+            {
+               get_translated_text = get_translated_text;
+            }
+           
+            console.log(get_gu_data[i]);
+            console.log(get_translated_text);
+
+          }
+          // console.log(get_translated_text);
+          speech_the_bot(get_translated_text);
+
+       }*/
+
+      function speech_in_gujarati(data)
+
+      {
+         var langSource = "en";
+    var apiKey = "AIzaSyDyV5WeagWo-zMsjRiC0cBbju784t_dA14";
+    var newtext= "";
+     var text =data;
+    var i=0;
+   
+   var langTarget = "gu"; // The language Google will translate the text in.
+        var apiurl = "https://www.googleapis.com/language/translate/v2";
+ 
+        var failed = 0;
+      
+        $.ajax({
+            type: "GET",
+            url: apiurl,
+            data: { key: apiKey, source: langSource, target: langTarget, q: text },
+            dataType: 'json',
+            success: function(data){
+                $fromTranslate = data.data.translations[0].translatedText;
+                newtext = $fromTranslate;
+                //console.log($fromTranslate);
+                
+               translate_in_gujrati_speech(newtext);
+            },
+            error: function(data){
+                failed = 1;
+                console.log(data.error.code); // Returns a 403 in debug.
+
+            }
+        });
+
+     
+      }
+      
+     
+      
+      
+    function get_agribot_response()
+    {
+      var input_text = $('#text-input').val();
+      var user_html= '<div class="chat my"><p class="chat-message">'+ input_text +'</p></div>';
+
+       $("#text-input").val("");
+       $(".chatbox").append(user_html);
+
+     $(".chatbox").animate({scrollTop: $('.chatbox')[0].scrollHeight});
+
+       $.get("/ask-questions", { msg: input_text }).done(function(data) {
+            var botHtml = '<div class="chat bot"><p class="chat-message">'+ data +'</p></div>';
+            $(".chatbox").append(botHtml);
+             speech_the_bot(botHtml);
+           // speech_in_gujarati(data);
+           
+        $(".chatbox").animate({scrollTop: $('.chatbox')[0].scrollHeight});
+        });
+       recognizing =true;
+
+    }
+
+    $('#get_response_btn').click(function(w)
+    {
+      get_agribot_response();
+      recognizing = false;
+    });
+    $('#text-input').keypress(function(e)
+    {
+        if(e.which == 13)
+        {
+          get_agribot_response();
+        }
+        recognizing = false;
+    });
+    $('#add-voice-icon').click(function()
+    {
+        utterThis = new SpeechSynthesisUtterance('hi i am your agridoctor.');
+        synth.speak(utterThis);
+        reset();
+       
+    });
+
+    
+        transcription = document.getElementById('text-input'),
+        interim_span = document.getElementById('interim');
+
+        interim_span.style.opacity = '0.5';
+
+
+        function reset() {
+          recognizing = false;
+          interim_span.innerHTML = '';
+          transcription.innerHTML = '';
+          speech.start();
+        }
+
+        var speech = new webkitSpeechRecognition() || speechRecognition();
+       
+
+        speech.continuous = true;
+        speech.interimResults = true;
+        speech.lang = 'en-IN'; // check google web speech example source for more lanuages
+        //speech.start(); //enables recognition on default
+
+        speech.onstart = function() {
+            // When recognition begins
+            recognizing = true;
+        };
+
+        speech.onresult = function(event) {
+          // When recognition produces result
+          var interim_transcript = '';
+          var final_transcript = '';
+
+          // main for loop for final and interim results
+          for (var i = event.resultIndex; i < event.results.length; ++i) {
+            if (event.results[i].isFinal) {
+              final_transcript += event.results[i][0].transcript;
+            } else {
+              interim_transcript += event.results[i][0].transcript;
+            }
+          }
+          document.getElementById('text-input').value =  final_transcript;
+
+          interim_span.innerHTML = interim_transcript;
+
+
+        };
+
+        speech.onerror = function(event) {
+            // Either 'No-speech' or 'Network connection error'
+            console.error(event.error);
+        };
+
+        speech.onend = function() {
+            // When recognition ends
+            recognition = false;
+            get_agribot_response();
+            
+        };
+
+
+
+    });
+  </script>
+{% endblock %}	
+

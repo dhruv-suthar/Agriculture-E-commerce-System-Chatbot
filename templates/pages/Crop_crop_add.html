@@ -1,0 +1,142 @@
+{% extends 'pages/layout.html' %}
+
+{% block body %}
+
+            <div id="page-wrapper">
+                <div class="container-fluid">
+                    <div class="row">
+                       <div class="col-lg-12">
+                           <ol class="breadcrumb " style="margin-top: 30px;font-size: 15px;background-color: none;">
+                            <li><a href="#">Dashboard</a></li>
+                            <li class="active">Crop Management</li>
+                            <li class="active">Add Crop</li>
+                        </ol>
+                        <hr>
+                       </div>
+                    </div>
+                    <!-- /.row -->
+
+                    <div class="row">
+                        <div class="col-sm-2"></div>
+                        <div class="col-sm-8 center-block">
+                            <div class="panel panel-default">
+                                <div class="panel-heading">Add Crop</div>
+                            
+                            <div class="panel-body">
+                               <form method="post"  action=""
+                                  enctype=multipart/form-data>
+                                      <div class="form-group inline">    
+                                        <ul class="list list-unstyled upload-i_v_wrapper" style="display: inline-flex;">
+                                           <li>
+                                             <input class="file-upload-input" type='file' onchange="readURL(this);" accept="image/*" hidden="hidden" style="display: none;"  required="" name="file-upload-image" />
+                                             <img class="img-circle file-upload-image img-responsive   all-border " src="" alt="your image"  style="display: none;" /><br>
+                                             <button type="button" class="btn btn-block btn-lg all-border upload_btn glyphicon glyphicon-plus text-center" onchange="readURL(this); "  style="display: block;"></button>
+                                           </li>
+                                           <li>  
+                                            <br>
+                                            <button type="button" onclick="removeUpload()" class="btn btn-danger btn-sm remove-image  all-border" style="display: none;">Remove <span class="image-title"></span></button><br><br><br><br><br>
+                                            <span class="text-center image-title-no" style="display: block;">Upload Image.</span>
+                                            </li>
+                                         </ul>
+                                        </div>
+
+                                        
+                                            
+
+                                                <div class="form-group">
+                                                    <label for="Crop_Category" class="col-form-label ">Crop Category</label>
+                                                    <select class="form-control all-border" placeholder="user" name="crop_category" required="">
+                                                        {% for crop_category_data in crop_category_data %}
+                                                        
+                                                         <option value="{{ crop_category_data.crop_category_id }}">{{ crop_category_data.crop_category_name }}</option>
+                                                      
+                                                        {% endfor %}
+                                                     
+                                                    </select>
+                                                </div>
+
+                                                
+                                                 <div class="form-group">
+                                                      <label for="Crop_Name" class="col-form-label ">Crop Name</label>
+                                                    <input type="text" class="form-control all-border" id="Crop_Name" placeholder="" name="crop_name" value="" required="">
+                                                </div>
+
+                                                  <div class="form-group">
+                                                      <label for="Crop_Description" class="col-form-label ">Crop Description</label>
+                                                      <textarea class="form-control" rows="4" id="Crop_Description" name="crop_description" required=""></textarea>
+                                                </div>
+
+                                                  <button type="submit" class="btn btn-primary btn-block">Add</button>
+                                         
+                                       
+                                        
+                                 </form>
+                                 </div>
+                            </div>
+                        </div>
+                       <div class="col-sm-2"></div>
+                    </div>
+                  
+
+             
+            
+                   
+
+
+                </div>
+                <!-- /.container-fluid -->
+            </div>
+            <!-- /#page-wrapper -->
+
+       
+        <script>
+
+
+$(document).ready(function(){
+
+    $('.upload_btn').click(function(){
+        $('.file-upload-input').click();
+    });
+
+   
+});
+
+ function readURL(input)
+    {
+               if (input.files && input.files[0]) {
+
+            var reader = new FileReader();
+
+          reader.onload = function(e) {
+            $('.upload_btn').hide();
+             $('.image-title-no').hide();
+            $('.file-upload-image').attr('src', e.target.result);
+            $('.file-upload-image').show();
+            $('.remove-image').show();
+           
+            $('.image-title').html(input.files[0].name);
+          };
+
+          reader.readAsDataURL(input.files[0]);
+           console.log($('.file-upload-input')[0].files[0]);
+
+        } else {
+          removeUpload();
+        }
+    }
+
+    function removeUpload()
+    {
+       
+          $('.file-upload-input').replaceWith($('.file-upload-input').clone());
+        $('.file-upload-input').val('');
+        $('.file-upload-image').hide();
+        $('.remove-image').hide();
+        $('.upload_btn').show();
+         $('.image-title-no').show();
+    } 
+    </script>
+
+        
+
+{% endblock %}
